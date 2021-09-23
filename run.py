@@ -48,9 +48,6 @@ class Board:
       row_index = 0
       
 
-
-
-
 def start_game():
   print("Welcome to the Sudoku app!")
   print()
@@ -98,4 +95,42 @@ column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 game_board = (start_game())
 game_board.print_board()
+
+#checking input
+invalid_input = True
+while invalid_input:
+    invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a column " \
+                  "number(1-9) - eg a5 or c7"
+    try:
+        row_input, column_input = list(input("Enter a row and column to input to:").strip().replace
+                           (" ", "").replace(",", "").replace("-", ""))
+    except:
+        print(invalid_msg)
+        print()
+
+    else:
+        if row_input.lower() in row_values and int(column_input) in column_values:
+            invalid_input = False
+            print()
+        else:
+            print(invalid_msg)
+            print()
+
+
+invalid_input = True
+while invalid_input:
+    invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9"
+    try:
+        input_value = input("Enter the number you wish to input to the board (0-9)").replace(" ", "")
+    except:
+        print(invalid_msg)
+        print()
+    else:
+        if int(input_value) in column_values:
+            invalid_input = False
+            print()
+        else:
+            print(invalid_msg)
+            print()
+
 
