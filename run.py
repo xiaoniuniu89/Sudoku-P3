@@ -57,14 +57,14 @@ class Board:
       else:
         print("Square occupied")
 
-    def next_empty_cell(grid):
+    def next_empty_cell(self, grid):
       for row in range(9):
         for column in range(9):
           if grid[row][column] == " ":
             return row, column
       return None, None
 
-    def possible(grid, number, row, column):
+    def possible(self, grid, number, row, column):
       row_values = grid[row]
       if number in row_values:
         return False 
@@ -79,6 +79,19 @@ class Board:
           if grid[row][column] == number:
             return False 
       return True 
+
+    def solve(self, grid):
+      row, column = self.next_empty_cell(grid)
+      if row is None:
+        return True 
+
+      for number in range(1, 10):
+        if self.possible(grid, number, row, column):
+          grid[row][column] = colored(number, "yellow")
+          if self.solve(grid):
+            return True 
+        grid[row][column] = " "
+      return False 
         
 
 def start_game():
@@ -167,6 +180,7 @@ while invalid_input:
             print()
 
 game_board.input_user_value(row_input, column_input, input_value)
+game_board.solve(game_board.grid)
 game_board.print_board()
 
 
