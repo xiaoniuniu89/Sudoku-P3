@@ -10,8 +10,7 @@ class Board:
     
 
 
-
-def welcome_message():
+def start_game():
   print("Welcome to the Sudoku app!")
   print()
   print("To play, first select the level of difficulty")
@@ -27,8 +26,29 @@ def welcome_message():
       user_choice = input("please enter 1, 2 or 3: ")
 
   user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
-  print(f'you chose the number {user_choice}')
+
+  game_board = Board(get_grid(user_choice))
+  return game_board
+  
+  
   
 
+  
+def get_grid(input):
+    if input == 1:
+        response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
+        grid = response.json()["board"]
+        return grid
+    elif input == 2:
+        response = requests.get("https://sugoku.herokuapp.com/board?difficulty=medium")
+        grid = response.json()["board"]
+        return grid
+    if input == 3:
+        response = requests.get("https://sugoku.herokuapp.com/board?difficulty=hard")
+        grid = response.json()["board"]
+        return grid
 
-welcome_message()
+# main game loop
+
+game_board = (start_game())
+print(np.matrix(game_board.grid))
