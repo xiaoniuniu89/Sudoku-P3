@@ -56,6 +56,29 @@ class Board:
         self.grid[row_index_value][column_index_value] = colored(value, "red")
       else:
         print("Square occupied")
+
+    def next_empty_cell(grid):
+      for row in range(9):
+        for column in range(9):
+          if grid[row][column] == " ":
+            return row, column
+      return None, None
+
+    def possible(grid, number, row, column):
+      row_values = grid[row]
+      if number in row_values:
+        return False 
+      col_values = [grid[row][column] for row in range(9)]
+      if number in col_values:
+        return False 
+      row_start = (row//3) * 3
+      col_start = (row//3) * 3
+
+      for rows in range(row_start, row_start + 3):
+        for column in range(col_start, col_start + 3):
+          if grid[row][column] == number:
+            return False 
+      return True 
         
 
 def start_game():
