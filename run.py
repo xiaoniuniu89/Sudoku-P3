@@ -2,6 +2,15 @@ import numpy as np
 from termcolor import colored 
 import requests 
 
+# Board class that will store the sudoku board and its methods
+class Board:
+    def __init__(self, grid):
+        self.grid = grid
+
+    
+
+
+
 def welcome_message():
   print("Welcome to the Sudoku app!")
   print()
