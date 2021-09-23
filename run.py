@@ -46,7 +46,17 @@ class Board:
         self.print_section(i)
       print(self.border)
       row_index = 0
-      
+  
+    def input_user_value(self, row, column, value):
+      global row_values
+      global column_values
+      row_index_value = row_values.index(row.lower())
+      column_index_value = column_values.index(int(column))
+      if self.grid[row_index_value][column_index_value] == " ":
+        self.grid[row_index_value][column_index_value] = colored(value, "red")
+      else:
+        print("Square occupied")
+        
 
 def start_game():
   print("Welcome to the Sudoku app!")
@@ -132,5 +142,8 @@ while invalid_input:
         else:
             print(invalid_msg)
             print()
+
+game_board.input_user_value(row_input, column_input, input_value)
+game_board.print_board()
 
 
