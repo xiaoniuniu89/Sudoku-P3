@@ -87,7 +87,7 @@ class Board:
 
       for number in range(1, 10):
         if self.possible(grid, number, row, column):
-          grid[row][column] = colored(number, "yellow")
+          grid[row][column] = number
           if self.solve(grid):
             return True 
         grid[row][column] = " "
