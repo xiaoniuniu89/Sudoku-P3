@@ -1,6 +1,7 @@
 import numpy as np 
 from termcolor import colored 
 import requests 
+import copy 
 
 # Board class that will store the sudoku board and its methods
 class Board:
@@ -180,7 +181,9 @@ while invalid_input:
             print()
 
 game_board.input_user_value(row_input, column_input, input_value)
-game_board.solve(game_board.grid)
+copy_board = Board(copy.deepcopy(game_board.grid))
+copy_board.solve(copy_board.grid)
+copy_board.print_board()
 game_board.print_board()
 
 
