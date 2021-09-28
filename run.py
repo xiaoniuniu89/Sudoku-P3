@@ -70,18 +70,16 @@ class Board:
                 print("Square occupied")
 
         else:
-            print(self.grid[row_index_value][column_index_value])
             value = self.grid[row_index_value][column_index_value]
             return value
         # self.generate_hint(row, column, value)
 
     def check_solved(self, grid):
         for row in range(9):
-            for i in range(9):
-                if str(i).isnumeric():
-                    return True
-                else:
+            for column in range(9):
+                if grid[row][column] == " ":
                     return False
+        return True
 
 
     def next_empty_cell(self, grid):
@@ -203,6 +201,7 @@ while unsolved:
         invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9 or h for hint"
         try:
             input_value = input("Enter the number you wish to input to the board (0-9), or input 'h' for a hint").replace(" ", "")
+
         except:
             print(invalid_msg)
             print()
@@ -213,17 +212,29 @@ while unsolved:
                     invalid_input = False
                     game_board.generate_hint(row_input, column_input, copy_board.generate_hint(row_input, column_input))
 
-            elif int(input_value) in column_values:
-                invalid_input = False
-                game_board.input_user_value(row_input, column_input, input_value)
-                game_board.print_board()
-                print()
+            elif str(input_value).isalnum():
+                if int(input_value) in column_values:
+                    invalid_input = False
+                    game_board.input_user_value(row_input, column_input, input_value)
+                    print()
+
+                else:
+                    print(invalid_msg)
+                    print()
 
             else:
                 print(invalid_msg)
                 print()
-    if game_board.check_solved(game_board.grid):
-        unsolved = False
+
+        finally:
+            if game_board.check_solved(game_board.grid):
+                print("solved")
+                game_board.print_board()
+            else:
+                game_board.print_board()
+
+
+
 
 
 
