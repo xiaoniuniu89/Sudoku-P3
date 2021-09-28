@@ -118,26 +118,29 @@ class Board:
       return False 
 
 def start_game():
-  print("Welcome to the Sudoku app!")
-  print()
-  print("To play, first select the level of difficulty")
-  print()
-  print("Easy: 1 ~ Medium: 2 ~ Hard: 3")
-  print()
-  # While loop for input validation - user must input 1, 2 or 3
-  user_choice = input("please enter 1, 2 or 3: ")
-  expected_input = ["1", "2", "3"]
-  while user_choice not in expected_input:
-      print("Sorry, to continue, you must enter 1 for easy, 2 for medium or 3 for hard: ")
-      print()
-      user_choice = input("please enter 1, 2 or 3: ")
+    print()
+    print("############################################################################")
+    print()
+    print("Welcome to the Sudoku app!")
+    print()
+    print("To play, first select the level of difficulty")
+    print()
+    print("Easy: 1 ~ Medium: 2 ~ Hard: 3")
+    print()
+    # While loop for input validation - user must input 1, 2 or 3
+    user_choice = input("please enter 1, 2 or 3: ")
+    expected_input = ["1", "2", "3"]
+    while user_choice not in expected_input:
+        print("Sorry, to continue, you must enter 1 for easy, 2 for medium or 3 for hard: ")
+        print()
+        user_choice = input("please enter 1, 2 or 3: ")
 
-  user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
+    user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
 
-  game_board = Board(get_grid(user_choice))
-  game_board.remove_zeros()
-  print()
-  return game_board
+    game_board = Board(get_grid(user_choice))
+    game_board.remove_zeros()
+    print()
+    return game_board
 
 
 def get_grid(input):
@@ -225,8 +228,8 @@ def main():
                     print()
 
             finally:
+                game_board.print_board()
                 if game_board.check_solved(game_board.grid):
-                    game_board.print_board()
                     unsolved = False
                     print()
                     print("Congratulations")
