@@ -58,6 +58,32 @@ class Board:
       else:
         print("Square occupied")
 
+    def generate_hint(self, row, column, value=None):
+        global row_values
+        global column_values
+        row_index_value = row_values.index(row.lower())
+        column_index_value = column_values.index(int(column))
+        if value:
+            if self.grid[row_index_value][column_index_value] == " ":
+                self.grid[row_index_value][column_index_value] = value
+            else:
+                print("Square occupied")
+
+        else:
+            print(self.grid[row_index_value][column_index_value])
+            value = self.grid[row_index_value][column_index_value]
+            return value
+        # self.generate_hint(row, column, value)
+
+    def check_solved(self, grid):
+        for row in range(9):
+            for i in range(9):
+                if str(i).isnumeric():
+                    return True
+                else:
+                    return False
+
+
     def next_empty_cell(self, grid):
       for row in range(9):
         for column in range(9):
@@ -137,53 +163,72 @@ row = ["  A", "  B", "  C", "  D", "  E", "  F", "  G", "  H", "  I"]
 row_index = 0
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+hint_value = ["h"]
+row_input = ""
+column_input = 0
 
 # main game loop
 
 game_board = (start_game())
 game_board.print_board()
-
-#checking input
-invalid_input = True
-while invalid_input:
-    invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a column " \
-                  "number(1-9) - eg a5 or c7"
-    try:
-        row_input, column_input = list(input("Enter a row and column to input to:").strip().replace
-                           (" ", "").replace(",", "").replace("-", ""))
-    except:
-        print(invalid_msg)
-        print()
-
-    else:
-        if row_input.lower() in row_values and int(column_input) in column_values:
-            invalid_input = False
-            print()
-        else:
-            print(invalid_msg)
-            print()
-
-
-invalid_input = True
-while invalid_input:
-    invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9"
-    try:
-        input_value = input("Enter the number you wish to input to the board (0-9)").replace(" ", "")
-    except:
-        print(invalid_msg)
-        print()
-    else:
-        if int(input_value) in column_values:
-            invalid_input = False
-            print()
-        else:
-            print(invalid_msg)
-            print()
-
-game_board.input_user_value(row_input, column_input, input_value)
 copy_board = Board(copy.deepcopy(game_board.grid))
 copy_board.solve(copy_board.grid)
-copy_board.print_board()
-game_board.print_board()
+
+unsolved = True
+while unsolved:
+    #checking input
+    invalid_input = True
+    while invalid_input:
+        invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a column " \
+                      "number(1-9) - eg a5 or c7"
+        try:
+            row_input, column_input = list(input("Enter a row and column to input to:").strip().replace
+                               (" ", "").replace(",", "").replace("-", ""))
+
+        except:
+            print(invalid_msg)
+            print()
+
+        else:
+            if row_input.lower() in row_values and int(column_input) in column_values:
+                invalid_input = False
+                print()
+            else:
+                print(invalid_msg)
+                print()
+
+
+    invalid_input = True
+    while invalid_input:
+        invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9 or h for hint"
+        try:
+            input_value = input("Enter the number you wish to input to the board (0-9), or input 'h' for a hint").replace(" ", "")
+        except:
+            print(invalid_msg)
+            print()
+
+        else:
+            if input_value.isalpha():
+                if input_value.lower() in hint_value:
+                    invalid_input = False
+                    game_board.generate_hint(row_input, column_input, copy_board.generate_hint(row_input, column_input))
+
+            elif int(input_value) in column_values:
+                invalid_input = False
+                game_board.input_user_value(row_input, column_input, input_value)
+                game_board.print_board()
+                print()
+
+            else:
+                print(invalid_msg)
+                print()
+    if game_board.check_solved(game_board.grid):
+        unsolved = False
+
+
+
+
+
+
 
 
