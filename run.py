@@ -100,7 +100,7 @@ class Board:
                     return row, column
         return None, None  # no empty cells - board is full
 
-    # recursively checks if 1-9 will work in a cell
+    #  checks if 1-9 will work in a cell
     def possible(self, grid, number, row, column):
         row_values = grid[row]  # check row
         if number in row_values:
@@ -255,8 +255,15 @@ def main():
                 elif str(input_value).isalnum():  # written this way to check against pressing enter key
                     if int(input_value) in column_values:
                         invalid_input = False
-                        game_board.input_user_value(row_input, column_input, input_value)
-                        print()
+                        row_index = row_values.index(row_input)
+                        column_index = column_values.index(int(column_input))
+                        if game_board.possible(game_board.grid, int(input_value), row_index, column_index):
+                            game_board.input_user_value(row_input, column_input, input_value)
+                            print()
+                        else:
+                            print()
+                            print("Sorry, that number doesn't work in that cell, please try again!")
+
 
                     else:
                         print(invalid_msg)
@@ -298,4 +305,13 @@ def main():
                             print()
 
 
-main()  # initial call to run the game 
+main()  # initial call to run the game
+
+# To do
+# fix hints left
+# when out of hints offer to print solution
+# add timer to display how long it took to solve the board
+
+
+
+
