@@ -162,8 +162,16 @@ def get_grid(input):
         return grid
 
 
+def decrease_hints(hint):
+    hint -= 1
+    return hint
+
 # some variable
-row = ["  A", "  B", "  C", "  D", "  E", "  F", "  G", "  H", "  I"]
+hints = 5
+row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a single numner",
+       "  D    . Only numbers 1-9 can be used", "  E    . Each 3x3 box can contain 1-9 once",
+       "  F    . Each row can contain 1-9 once", "  G    . Each column can contain 1-9 once",
+       "  H", f"  I            ~ Hints left: {hints}"]
 row_index = 0
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -218,6 +226,7 @@ def main():
                         invalid_input = False
                         game_board.generate_hint(row_input, column_input,
                                                  solved_board.generate_hint(row_input, column_input))
+
 
                 elif str(input_value).isalnum():
                     if int(input_value) in column_values:
