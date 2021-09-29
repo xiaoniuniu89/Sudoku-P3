@@ -61,7 +61,8 @@ class Board:
         global column_values
         row_index_value = row_values.index(row.lower())
         column_index_value = column_values.index(int(column))
-        if self.grid[row_index_value][column_index_value] == " " or self.copy_grid[row_index_value][column_index_value] == " ":
+        if self.grid[row_index_value][column_index_value] == " " \
+                or self.copy_grid[row_index_value][column_index_value] == " ":
             self.grid[row_index_value][column_index_value] = colored(value, "red")
         else:
             print("Square occupied")
@@ -117,6 +118,10 @@ class Board:
                     return False
         return True
 
+    # a lot of help from the following tutorials regarding recursion and backtracking:
+    # 1) https://www.youtube.com/watch?v=8lhxIOAfDss
+    # 2) https://www.youtube.com/watch?v=G_UYXzGuqvM
+    # 3) https://www.youtube.com/watch?v=tvP_FZ-D9Ng
     def solve(self, grid):
         # step 1 is to find the next available empty cell
         row, column = self.next_empty_cell(grid)
@@ -257,6 +262,8 @@ def main():
                         invalid_input = False
                         row_index = row_values.index(row_input)
                         column_index = column_values.index(int(column_input))
+                        # call possible() function to check if the inputted number is
+                        # legal according to the rules of sudoku
                         if game_board.possible(game_board.grid, int(input_value), row_index, column_index):
                             game_board.input_user_value(row_input, column_input, input_value)
                             print()
