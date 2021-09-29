@@ -8,11 +8,12 @@ import copy
 class Board:
     def __init__(self, grid):
         self.grid = grid
+        self.copy_grid = copy.deepcopy(self.grid)
         self.border = colored(("+---" * 9) + "+", "blue")
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")
 
-    def remove_zeros(self):
-        for i in self.grid:
+    def remove_zeros(self, grid):
+        for i in grid:
             for x, y in enumerate(i):
                 if y == 0:
                     i[x] = " "
@@ -49,12 +50,13 @@ class Board:
         print(self.border)
         row_index = 0
 
+
     def input_user_value(self, row, column, value):
         global row_values
         global column_values
         row_index_value = row_values.index(row.lower())
         column_index_value = column_values.index(int(column))
-        if self.grid[row_index_value][column_index_value] == " ":
+        if self.grid[row_index_value][column_index_value] == " " or self.copy_grid[row_index_value][column_index_value] == " ":
             self.grid[row_index_value][column_index_value] = colored(value, "red")
         else:
             print("Square occupied")
@@ -139,7 +141,8 @@ def start_game():
     user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
 
     game_board = Board(get_grid(user_choice))
-    game_board.remove_zeros()
+    game_board.remove_zeros(game_board.grid)
+    game_board.remove_zeros(game_board.copy_grid)
     print()
     return game_board
 
@@ -172,7 +175,6 @@ column_input = 0
 def main():
     game_board = (start_game())
     game_board.print_board()
-    copy_board = Board(copy.deepcopy(game_board.grid))
     solved_board = Board(copy.deepcopy(game_board.grid))
     solved_board.solve(solved_board.grid)
 
