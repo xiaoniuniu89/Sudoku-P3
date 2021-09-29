@@ -1,62 +1,63 @@
 import time
-from termcolor import colored 
-import requests 
-import copy 
+from termcolor import colored
+import requests
+import copy
+
 
 # Board class that will store the sudoku board and its methods
 class Board:
     def __init__(self, grid):
         self.grid = grid
-        self.border = colored(("+---"*9)+"+", "blue")
+        self.border = colored(("+---" * 9) + "+", "blue")
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")
 
     def remove_zeros(self):
-      for i in self.grid:
-        for x, y in enumerate(i):
-          if y == 0:
-            i[x] = " "
-    
+        for i in self.grid:
+            for x, y in enumerate(i):
+                if y == 0:
+                    i[x] = " "
+
     def print_section(self, i):
-      global row_index
-      blue_post = colored("|", "blue")
-      post = "|"
-      print(blue_post + f" {(i[0])} "
-                  + post + f" {(i[1])} "
-                  + post + f" {(i[2])} "
-                  + blue_post + f" {(i[3])} "
-                  + post + f" {(i[4])} "
-                  + post + f" {(i[5])} "
-                  + blue_post + f" {(i[6])} "
-                  + post + f" {(i[7])} "
-                  + post + f" {(i[8])} "
-                  + blue_post + row[row_index]
-                  )
-      row_index += 1
+        global row_index
+        blue_post = colored("|", "blue")
+        post = "|"
+        print(blue_post + f" {(i[0])} "
+              + post + f" {(i[1])} "
+              + post + f" {(i[2])} "
+              + blue_post + f" {(i[3])} "
+              + post + f" {(i[4])} "
+              + post + f" {(i[5])} "
+              + blue_post + f" {(i[6])} "
+              + post + f" {(i[7])} "
+              + post + f" {(i[8])} "
+              + blue_post + row[row_index]
+              )
+        row_index += 1
 
     def print_board(self):
-      global row_index
-      print("  1   2   3   4   5   6   7   8   9")
-      print(self.border)
-      for i in self.grid[0:3]:
-        self.print_section(i)
-      print(self.section_bottom)
-      for i in self.grid[3:6]:
-        self.print_section(i)
-      print(self.section_bottom)
-      for i in self.grid[6:9]:
-        self.print_section(i)
-      print(self.border)
-      row_index = 0
-  
+        global row_index
+        print("  1   2   3   4   5   6   7   8   9")
+        print(self.border)
+        for i in self.grid[0:3]:
+            self.print_section(i)
+        print(self.section_bottom)
+        for i in self.grid[3:6]:
+            self.print_section(i)
+        print(self.section_bottom)
+        for i in self.grid[6:9]:
+            self.print_section(i)
+        print(self.border)
+        row_index = 0
+
     def input_user_value(self, row, column, value):
-      global row_values
-      global column_values
-      row_index_value = row_values.index(row.lower())
-      column_index_value = column_values.index(int(column))
-      if self.grid[row_index_value][column_index_value] == " ":
-        self.grid[row_index_value][column_index_value] = colored(value, "red")
-      else:
-        print("Square occupied")
+        global row_values
+        global column_values
+        row_index_value = row_values.index(row.lower())
+        column_index_value = column_values.index(int(column))
+        if self.grid[row_index_value][column_index_value] == " ":
+            self.grid[row_index_value][column_index_value] = colored(value, "red")
+        else:
+            print("Square occupied")
 
     def generate_hint(self, row, column, value=None):
         global row_values
@@ -73,7 +74,6 @@ class Board:
             value = self.grid[row_index_value][column_index_value]
             return value
 
-
     def check_solved(self, grid):
         for row in range(9):
             for column in range(9):
@@ -82,40 +82,41 @@ class Board:
         return True
 
     def next_empty_cell(self, grid):
-      for row in range(9):
-        for column in range(9):
-          if grid[row][column] == " ":
-            return row, column
-      return None, None
+        for row in range(9):
+            for column in range(9):
+                if grid[row][column] == " ":
+                    return row, column
+        return None, None
 
     def possible(self, grid, number, row, column):
-      row_values = grid[row]
-      if number in row_values:
-        return False 
-      col_values = [grid[row][column] for row in range(9)]
-      if number in col_values:
-        return False 
-      row_start = (row//3) * 3
-      col_start = (row//3) * 3
+        row_values = grid[row]
+        if number in row_values:
+            return False
+        col_values = [grid[row][column] for row in range(9)]
+        if number in col_values:
+            return False
+        row_start = (row // 3) * 3
+        col_start = (row // 3) * 3
 
-      for rows in range(row_start, row_start + 3):
-        for column in range(col_start, col_start + 3):
-          if grid[row][column] == number:
-            return False 
-      return True 
+        for rows in range(row_start, row_start + 3):
+            for column in range(col_start, col_start + 3):
+                if grid[row][column] == number:
+                    return False
+        return True
 
     def solve(self, grid):
-      row, column = self.next_empty_cell(grid)
-      if row is None:
-        return True 
+        row, column = self.next_empty_cell(grid)
+        if row is None:
+            return True
 
-      for number in range(1, 10):
-        if self.possible(grid, number, row, column):
-          grid[row][column] = number
-          if self.solve(grid):
-            return True 
-        grid[row][column] = " "
-      return False 
+        for number in range(1, 10):
+            if self.possible(grid, number, row, column):
+                grid[row][column] = number
+                if self.solve(grid):
+                    return True
+            grid[row][column] = " "
+        return False
+
 
 def start_game():
     print()
@@ -158,7 +159,7 @@ def get_grid(input):
         return grid
 
 
-#some variable
+# some variable
 row = ["  A", "  B", "  C", "  D", "  E", "  F", "  G", "  H", "  I"]
 row_index = 0
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
@@ -167,22 +168,24 @@ hint_value = ["h"]
 row_input = ""
 column_input = 0
 
+
 def main():
     game_board = (start_game())
     game_board.print_board()
     copy_board = Board(copy.deepcopy(game_board.grid))
-    copy_board.solve(copy_board.grid)
+    solved_board = Board(copy.deepcopy(game_board.grid))
+    solved_board.solve(solved_board.grid)
 
     unsolved = True
     while unsolved:
-        #checking input
+        # checking input
         invalid_input = True
         while invalid_input:
             invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a column " \
                           "number(1-9) - eg a5 or c7"
             try:
                 row_input, column_input = list(input("Enter a row and column to input to: ").strip().replace
-                                   (" ", "").replace(",", "").replace("-", ""))
+                                               (" ", "").replace(",", "").replace("-", ""))
 
             except:
                 print(invalid_msg)
@@ -196,12 +199,12 @@ def main():
                     print(invalid_msg)
                     print()
 
-
         invalid_input = True
         while invalid_input:
             invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9 or h for hint"
             try:
-                input_value = input("Enter the number you wish to input to the board (0-9), or input 'h' for a hint: ").replace(" ", "")
+                input_value = input(
+                    "Enter the number you wish to input to the board (0-9), or input 'h' for a hint: ").replace(" ", "")
 
             except:
                 print(invalid_msg)
@@ -211,7 +214,8 @@ def main():
                 if input_value.isalpha():
                     if input_value.lower() in hint_value:
                         invalid_input = False
-                        game_board.generate_hint(row_input, column_input, copy_board.generate_hint(row_input, column_input))
+                        game_board.generate_hint(row_input, column_input,
+                                                 solved_board.generate_hint(row_input, column_input))
 
                 elif str(input_value).isalnum():
                     if int(input_value) in column_values:
@@ -257,15 +261,5 @@ def main():
                             print(msg)
                             print()
 
+
 main()
-
-
-
-
-
-
-
-
-
-
-
