@@ -7,22 +7,22 @@ import copy
 # Board class that will store the sudoku board and its methods
 class Board:
     def __init__(self, grid):
-        self.grid = grid
-        self.copy_grid = copy.deepcopy(self.grid)
-        self.border = colored(("+---" * 9) + "+", "blue")
-        self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")
+        self.grid = grid  # array of 9 arrays containing the unsolved sudoku board numbers
+        self.copy_grid = copy.deepcopy(self.grid)  # copy is needed for crosschecking user input with original grid
+        self.border = colored(("+---" * 9) + "+", "blue")  # printed blue border for every 3x3 row top
+        self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")  # 3x3 row bottom
 
-    def remove_zeros(self, grid):
+    def remove_zeros(self, grid):  # takes grid and replaces zero's with empty spaces
         for i in grid:
             for x, y in enumerate(i):
                 if y == 0:
                     i[x] = " "
 
-    def print_section(self, i):
+    def print_section(self, i):  # prints 3 3x3 sections - (3 rows of board)
         global row_index
         blue_post = colored("|", "blue")
         post = "|"
-        print(blue_post + f" {(i[0])} "
+        print(blue_post + f" {(i[0])} "  # builds from left to right '|' and next number from the rows array
               + post + f" {(i[1])} "
               + post + f" {(i[2])} "
               + blue_post + f" {(i[3])} "
@@ -35,13 +35,15 @@ class Board:
               )
         row_index += 1
 
+    # printing the board in done by printing 3 rows at a time. This was the easiest way to get row
+    # and column numbers and to have each 3x3 box to have ia nice border top and bottom
     def print_board(self):
         global row_index
-        print("  1   2   3   4   5   6   7   8   9")
-        print(self.border)
-        for i in self.grid[0:3]:
-            self.print_section(i)
-        print(self.section_bottom)
+        print("  1   2   3   4   5   6   7   8   9")  # column numbers reference
+        print(self.border)  # border top of first 3x3 row
+        for i in self.grid[0:3]:  # prints the first 3 arrays of the grid onto the board
+            self.print_section(i)  # border bottom of first 3x3
+        print(self.section_bottom)  # continue this way to print rest of board
         for i in self.grid[3:6]:
             self.print_section(i)
         print(self.section_bottom)
@@ -50,7 +52,10 @@ class Board:
         print(self.border)
         row_index = 0
 
-
+    # To be able to input a number to a cell, the cell in the original grid must be empty
+    # or the cell in the copy grid must be empty
+    # if cell in the copy grid is empty, it means the space contains a number the user
+    # inputted and therefore it can be updated
     def input_user_value(self, row, column, value):
         global row_values
         global column_values
@@ -61,6 +66,9 @@ class Board:
         else:
             print("Square occupied")
 
+    # when called there is no value - it will take the row and column
+    # cross reference with a copy of the solved board and then input that
+    # number into the game_board
     def generate_hint(self, row, column, value=None):
         global row_values
         global column_values
@@ -71,11 +79,12 @@ class Board:
                 self.grid[row_index_value][column_index_value] = value
             else:
                 print("Square occupied")
-
+        # this value will come from solved board
         else:
             value = self.grid[row_index_value][column_index_value]
             return value
 
+    # checks if a cell is empty or not - if no empty cells board is full
     def check_solved(self, grid):
         for row in range(9):
             for column in range(9):
@@ -83,40 +92,47 @@ class Board:
                     return False
         return True
 
+    # goes through the board cell by cell to find the next empty cell
     def next_empty_cell(self, grid):
         for row in range(9):
             for column in range(9):
-                if grid[row][column] == " ":
+                if grid[row][column] == " ":  # found an empty cell
                     return row, column
-        return None, None
+        return None, None  # no empty cells - board is full
 
+    # recursively checks if 1-9 will work in a cell
     def possible(self, grid, number, row, column):
-        row_values = grid[row]
+        row_values = grid[row]  # check row
         if number in row_values:
             return False
-        col_values = [grid[row][column] for row in range(9)]
+        col_values = [grid[row][column] for row in range(9)]  # check by column
         if number in col_values:
             return False
-        row_start = (row // 3) * 3
+        row_start = (row // 3) * 3  # check 3x3 square
         col_start = (row // 3) * 3
 
-        for rows in range(row_start, row_start + 3):
-            for column in range(col_start, col_start + 3):
+        for rows in range(row_start, row_start + 3):  # row of 3x3 grid
+            for column in range(col_start, col_start + 3):  # column of 3x3 grid
                 if grid[row][column] == number:
                     return False
         return True
 
     def solve(self, grid):
+        # step 1 is to find the next available empty cell
         row, column = self.next_empty_cell(grid)
-        if row is None:
+        if row is None:  # board is full
             return True
 
+        # step 2 is to try each number 1-9 to see if it a valid input
         for number in range(1, 10):
             if self.possible(grid, number, row, column):
                 grid[row][column] = number
+                # step 3 is to put the number in and try the next cell
+                # if the board cannot be solved this way then go back to the last cell and make it empty
+                # try again over and over until the board is solved
                 if self.solve(grid):
                     return True
-            grid[row][column] = " "
+            grid[row][column] = " "  # didn't work so backtrack and try again
         return False
 
 
@@ -139,7 +155,6 @@ def start_game():
         user_choice = input("please enter 1, 2 or 3: ")
 
     user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
-
     game_board = Board(get_grid(user_choice))
     game_board.remove_zeros(game_board.grid)
     game_board.remove_zeros(game_board.copy_grid)
@@ -161,10 +176,6 @@ def get_grid(input):
         grid = response.json()["board"]
         return grid
 
-
-def decrease_hints(hint):
-    hint -= 1
-    return hint
 
 # some variable
 hints = 5
