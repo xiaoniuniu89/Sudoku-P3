@@ -76,8 +76,9 @@ class Board:
         row_index_value = row_values.index(row.lower())
         column_index_value = column_values.index(int(column))
         if value:
-            if self.grid[row_index_value][column_index_value] == " ":
-                self.grid[row_index_value][column_index_value] = value
+            if self.grid[row_index_value][column_index_value] == " " \
+                    or self.copy_grid[row_index_value][column_index_value] == " ":
+                self.grid[row_index_value][column_index_value] = colored(value, "yellow")
             else:
                 print("Square occupied")
         # this value will come from solved board
@@ -138,7 +139,7 @@ class Board:
             for j in range(0, 3):
                 if self.grid[y0 + i][x0 + j] == n:  # start of row/column plus 3 cells makes 3x3 box
                     return False
-        return True  # if all of the above tests return false then it means the number is a valid choice 
+        return True  # if all of the above tests return false then it means the number is a valid choice
 
 
 # start game function called by main() function - will be called when program
@@ -195,7 +196,7 @@ row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a s
        "  H", f"  I            ~ Hints left: {hints}"]
 row_index = 0  # keep track of how many rows printed during print section function in board class
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
-column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+column_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hint_value = ["h"]
 row_input = ""
 column_input = 0
@@ -233,7 +234,7 @@ def main():
                 print()
 
             else:
-                if row_input.lower() in row_values and int(column_input) in column_values:
+                if row_input.lower() in row_values and column_input in column_values:
                     invalid_input = False  # means input is valid
                     print()
                 else:
@@ -263,13 +264,13 @@ def main():
                                                  solved_board.generate_hint(row_input, column_input))
 
                 elif str(input_value).isalnum():  # written this way to check against pressing enter key
-                    if int(input_value) in column_values:
+                    if input_value in column_values:
                         invalid_input = False
                         row_index = row_values.index(row_input)
-                        column_index = column_values.index(int(column_input))
+                        column_index = column_values.index(column_input)
                         # call possible() function to check if the inputted number is
                         # legal according to the rules of sudoku
-                        if game_board.possible(game_board.grid, row_index, column_index, int(input_value)):
+                        if game_board.possible(row_index, column_index, int(input_value)):
                             game_board.input_user_value(row_input, column_input, input_value)
                             print()
                         else:
@@ -324,3 +325,4 @@ main()  # initial call to run the game
 # fix hints left
 # when out of hints offer to print solution
 # add timer to display how long it took to solve the board
+
