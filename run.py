@@ -100,24 +100,24 @@ class Board:
                 if grid[row][column] == " ":  # found an empty cell
                     return row, column
         return None, None  # no empty cells - board is full
-
-    #  checks if 1-9 will work in a cell
-    def possible(self, grid, number, row, column):
-        row_values = grid[row]  # check row
-        if number in row_values:
-            return False
-        col_values = [grid[row][column] for row in range(9)]  # check by column
-        if number in col_values:
-            return False
-        row_start = (row // 3) * 3  # check 3x3 square
-        col_start = (row // 3) * 3
-
-        for rows in range(row_start, row_start + 3):  # row of 3x3 grid
-            for column in range(col_start, col_start + 3):  # column of 3x3 grid
-                if grid[row][column] == number:
-                    return False
-        return True
-
+    #
+    # #  checks if 1-9 will work in a cell
+    # def possible(self, grid, number, row, column):
+    #     row_values = grid[row]  # check row
+    #     if number in row_values:
+    #         return False
+    #     col_values = [grid[row][column] for row in range(9)]  # check by column
+    #     if number in col_values:
+    #         return False
+    #     row_start = (row // 3) * 3  # check 3x3 square
+    #     col_start = (row // 3) * 3
+    #
+    #     for rows in range(row_start, row_start + 3):  # row of 3x3 grid
+    #         for column in range(col_start, col_start + 3):  # column of 3x3 grid
+    #             if grid[row][column] == number:
+    #                 return False
+    #     return True
+    #
     # a lot of help from the following tutorials regarding recursion and backtracking:
     # 1) https://www.youtube.com/watch?v=8lhxIOAfDss
     # 2) https://www.youtube.com/watch?v=G_UYXzGuqvM
@@ -130,7 +130,7 @@ class Board:
 
         # step 2 is to try each number 1-9 to see if it a valid input
         for number in range(1, 10):
-            if self.possible(grid, number, row, column):
+            if self.possible(grid, row, column, number):
                 grid[row][column] = number
                 # step 3 is to put the number in and try the next cell
                 # if the board cannot be solved this way then go back to the last cell and make it empty
@@ -139,6 +139,41 @@ class Board:
                     return True
             grid[row][column] = " "  # didn't work so backtrack and try again
         return False
+
+    def possible(self, grid, y, x, n):
+        for i in range(0, 9):
+            if self.grid[y][i] == n:
+                return False
+        for i in range (0, 9):
+            if self.grid[i][x] == n:
+                return False
+        x0 = (x//3)*3
+        y0 = (y//3)*3
+        for i in range(0, 3):
+            for j in range(0, 3):
+                if self.grid[y0 + i][x0 + j] == n:
+                    return False
+        return True
+
+    # def solve(self, grid):
+    #     for y in range(9):
+    #         for x in range(9):
+    #             if self.grid[y][x] == " ":
+    #                 for n in range(1, 10):
+    #                     if self.possible(y, x, n):
+    #                         self.grid[y][x] = n
+    #                         self.solve(grid)
+    #                     self.grid[y][x] = " "
+    #                 self.grid = grid
+    #                 return
+    #
+    #
+
+
+
+
+
+
 
 # start game function called by main() function - will be called when program
 # is run and if user wants to play another game when finished.
@@ -187,11 +222,11 @@ def get_grid(input):
 # global variables used throughout the program
 hints = 5
 # printed to the right of the board
-row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a single numner",
+row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a single number",
        "  D    . Only numbers 1-9 can be used", "  E    . Each 3x3 box can contain 1-9 once",
        "  F    . Each row can contain 1-9 once", "  G    . Each column can contain 1-9 once",
        "  H", f"  I            ~ Hints left: {hints}"]
-row_index = 0  # keep track of how many rows printed during print section funciton in board class
+row_index = 0  # keep track of how many rows printed during print section function in board class
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 hint_value = ["h"]
@@ -200,7 +235,7 @@ column_input = 0
 
 # the main game loop - called when program runs and if user wants to play again when a puzzle is solved
 # it calls the start function which creates a grid and displays welcome message
-# main funciton will then make a copy of the board and solve it to be used for generating hints later
+# main function will then make a copy of the board and solve it to be used for generating hints later
 # it will print the board and ask for user input to print numbers to the board in a while loop
 # while loop ends when puzzle is solved
 def main():
@@ -208,6 +243,7 @@ def main():
     game_board.print_board()  # initial print board to screen
     solved_board = Board(copy.deepcopy(game_board.grid))  # create a copy of board and solves it
     solved_board.solve(solved_board.grid)
+    solved_board.print_board()
 
     unsolved = True
     while unsolved:
@@ -253,6 +289,7 @@ def main():
                 if input_value.isalpha():  # ir if user enters "h"
                     if input_value.lower() in hint_value: # which only contains the letter "h"
                         invalid_input = False
+
                         # the value for the hint comes from the solved board
                         game_board.generate_hint(row_input, column_input,
                                                  solved_board.generate_hint(row_input, column_input))
@@ -275,6 +312,7 @@ def main():
                     else:
                         print(invalid_msg)
                         print()
+
 
                 else:
                     print(invalid_msg)
@@ -315,6 +353,7 @@ def main():
 main()  # initial call to run the game
 
 # To do
+# fix solve function - it is not working correctly 
 # fix hints left
 # when out of hints offer to print solution
 # add timer to display how long it took to solve the board
