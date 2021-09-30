@@ -301,7 +301,7 @@ def main():
                         column_index = column_values.index(int(column_input))
                         # call possible() function to check if the inputted number is
                         # legal according to the rules of sudoku
-                        if game_board.possible(game_board.grid, int(input_value), row_index, column_index):
+                        if game_board.possible(game_board.grid, row_index, column_index, int(input_value)):
                             game_board.input_user_value(row_input, column_input, input_value)
                             print()
                         else:
@@ -353,7 +353,6 @@ def main():
 main()  # initial call to run the game
 
 # To do
-# fix solve function - it is not working correctly 
 # fix hints left
 # when out of hints offer to print solution
 # add timer to display how long it took to solve the board
