@@ -60,7 +60,7 @@ class Board:
         global row_values
         global column_values
         row_index_value = row_values.index(row.lower())
-        column_index_value = column_values.index(int(column))
+        column_index_value = column_values.index(column)
         if self.grid[row_index_value][column_index_value] == " " \
                 or self.copy_grid[row_index_value][column_index_value] == " ":
             self.grid[row_index_value][column_index_value] = colored(value, "red")
@@ -74,7 +74,7 @@ class Board:
         global row_values
         global column_values
         row_index_value = row_values.index(row.lower())
-        column_index_value = column_values.index(int(column))
+        column_index_value = column_values.index(column)
         if value:
             if self.grid[row_index_value][column_index_value] == " " \
                     or self.copy_grid[row_index_value][column_index_value] == " ":
@@ -145,6 +145,7 @@ class Board:
 # start game function called by main() function - will be called when program
 # is run and if user wants to play another game when finished.
 def start_game():
+    start = time.time()
     print()
     print("############################################################################")
     print()
@@ -200,6 +201,7 @@ column_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hint_value = ["h"]
 row_input = ""
 column_input = 0
+# start = time.time()
 
 
 # the main game loop - called when program runs and if user wants to play again when a puzzle is solved
@@ -213,6 +215,7 @@ def main():
     solved_board = Board(copy.deepcopy(game_board.grid))  # create a copy of board and solves it
     solved_board.solve(solved_board.grid)
     solved_board.print_board()
+    start = time.time()
 
     unsolved = True
     while unsolved:
@@ -289,10 +292,14 @@ def main():
 
             finally:
                 game_board.print_board()  # print updated game board
-                if game_board.check_solved(game_board.grid):  # check if any empty cells left
+                if solved_board.check_solved(solved_board.grid):  # check if any empty cells left
                     unsolved = False
                     print()
                     print("Congratulations")
+                    print()
+                    minutes = divmod((time.time() - start), 60)[0]
+                    seconds = round(divmod((time.time() - start), 60)[1])
+                    print(f"You completed the puzzle in {int(minutes)} minute(s) & {seconds} second(s)! ")
                     print()
                     invalid_choice = True
                     # check input - does user want to play again ?
@@ -302,7 +309,9 @@ def main():
                         try:
                             if play_again.lower() == "n":
                                 invalid_choice = False
+                                print()
                                 print("see you next time, thanks for playing")
+                                print()
                                 print("program will close in 5 seconds.......")
                                 time.sleep(5)  # close program
 
@@ -322,6 +331,7 @@ def main():
 main()  # initial call to run the game
 
 # To do
+# user input will not conflict with a hint input if 2 numbers in same row/column
 # fix hints left
 # when out of hints offer to print solution
 # add timer to display how long it took to solve the board
