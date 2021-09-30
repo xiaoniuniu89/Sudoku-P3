@@ -100,29 +100,13 @@ class Board:
                 if grid[row][column] == " ":  # found an empty cell
                     return row, column
         return None, None  # no empty cells - board is full
-    #
-    # #  checks if 1-9 will work in a cell
-    # def possible(self, grid, number, row, column):
-    #     row_values = grid[row]  # check row
-    #     if number in row_values:
-    #         return False
-    #     col_values = [grid[row][column] for row in range(9)]  # check by column
-    #     if number in col_values:
-    #         return False
-    #     row_start = (row // 3) * 3  # check 3x3 square
-    #     col_start = (row // 3) * 3
-    #
-    #     for rows in range(row_start, row_start + 3):  # row of 3x3 grid
-    #         for column in range(col_start, col_start + 3):  # column of 3x3 grid
-    #             if grid[row][column] == number:
-    #                 return False
-    #     return True
-    #
+
     # a lot of help from the following tutorials regarding recursion and backtracking:
     # 1) https://www.youtube.com/watch?v=8lhxIOAfDss
     # 2) https://www.youtube.com/watch?v=G_UYXzGuqvM
     # 3) https://www.youtube.com/watch?v=tvP_FZ-D9Ng
-    def solve(self, grid):
+
+    def solve(self, grid):  # recursively solve the sudoku board
         # step 1 is to find the next available empty cell
         row, column = self.next_empty_cell(grid)
         if row is None:  # board is full
@@ -130,7 +114,7 @@ class Board:
 
         # step 2 is to try each number 1-9 to see if it a valid input
         for number in range(1, 10):
-            if self.possible(grid, row, column, number):
+            if self.possible(row, column, number):
                 grid[row][column] = number
                 # step 3 is to put the number in and try the next cell
                 # if the board cannot be solved this way then go back to the last cell and make it empty
@@ -140,39 +124,21 @@ class Board:
             grid[row][column] = " "  # didn't work so backtrack and try again
         return False
 
-    def possible(self, grid, y, x, n):
+    # will check each cell and see if number passed is a valid [placement
+    def possible(self, y, x, n):  # y axis x axis and number
         for i in range(0, 9):
-            if self.grid[y][i] == n:
+            if self.grid[y][i] == n:  # checking each row
                 return False
-        for i in range (0, 9):
-            if self.grid[i][x] == n:
+        for i in range(0, 9):
+            if self.grid[i][x] == n:  # checking each column
                 return False
-        x0 = (x//3)*3
-        y0 = (y//3)*3
+        x0 = (x // 3) * 3   # start of 3x3 box row
+        y0 = (y // 3) * 3   # start of 3x3 box column
         for i in range(0, 3):
             for j in range(0, 3):
-                if self.grid[y0 + i][x0 + j] == n:
+                if self.grid[y0 + i][x0 + j] == n:  # start of row/column plus 3 cells makes 3x3 box
                     return False
-        return True
-
-    # def solve(self, grid):
-    #     for y in range(9):
-    #         for x in range(9):
-    #             if self.grid[y][x] == " ":
-    #                 for n in range(1, 10):
-    #                     if self.possible(y, x, n):
-    #                         self.grid[y][x] = n
-    #                         self.solve(grid)
-    #                     self.grid[y][x] = " "
-    #                 self.grid = grid
-    #                 return
-    #
-    #
-
-
-
-
-
+        return True  # if all of the above tests return false then it means the number is a valid choice 
 
 
 # start game function called by main() function - will be called when program
@@ -198,9 +164,10 @@ def start_game():
     user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
     game_board = Board(get_grid(user_choice))  # creates instance of Board class
     game_board.remove_zeros(game_board.grid)  # remove zeros and replace with empty string
-    game_board.remove_zeros(game_board.copy_grid)   # same for copy of the game_board grid
+    game_board.remove_zeros(game_board.copy_grid)  # same for copy of the game_board grid
     print()
     return game_board
+
 
 # this function reaches out to an api called sugoku and returns an easy, medium or hard puzzle depending on user input
 # information about the api and how to make requests can be found here: https://github.com/bertoort/sugoku
@@ -220,7 +187,7 @@ def get_grid(input):
 
 
 # global variables used throughout the program
-hints = 5
+hints = [5]
 # printed to the right of the board
 row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a single number",
        "  D    . Only numbers 1-9 can be used", "  E    . Each 3x3 box can contain 1-9 once",
@@ -232,6 +199,7 @@ column_values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 hint_value = ["h"]
 row_input = ""
 column_input = 0
+
 
 # the main game loop - called when program runs and if user wants to play again when a puzzle is solved
 # it calls the start function which creates a grid and displays welcome message
@@ -286,8 +254,8 @@ def main():
                 print()
 
             else:
-                if input_value.isalpha():  # ir if user enters "h"
-                    if input_value.lower() in hint_value: # which only contains the letter "h"
+                if input_value.isalpha():  # if user enters "h"
+                    if input_value.lower() in hint_value:  # which only contains the letter "h"
                         invalid_input = False
 
                         # the value for the hint comes from the solved board
@@ -335,7 +303,7 @@ def main():
                                 invalid_choice = False
                                 print("see you next time, thanks for playing")
                                 print("program will close in 5 seconds.......")
-                                time.sleep(5)   # close program
+                                time.sleep(5)  # close program
 
                             elif play_again.lower() == "y":
                                 invalid_choice = False
@@ -356,7 +324,3 @@ main()  # initial call to run the game
 # fix hints left
 # when out of hints offer to print solution
 # add timer to display how long it took to solve the board
-
-
-
-
