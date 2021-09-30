@@ -133,8 +133,8 @@ class Board:
         for i in range(0, 9):
             if self.grid[i][x] == n:  # checking each column
                 return False
-        x0 = (x // 3) * 3   # start of 3x3 box row
-        y0 = (y // 3) * 3   # start of 3x3 box column
+        x0 = (x // 3) * 3  # start of 3x3 box row
+        y0 = (y // 3) * 3  # start of 3x3 box column
         for i in range(0, 3):
             for j in range(0, 3):
                 if self.grid[y0 + i][x0 + j] == n:  # start of row/column plus 3 cells makes 3x3 box
@@ -173,16 +173,16 @@ def start_game():
 
 # this function reaches out to an api called sugoku and returns an easy, medium or hard puzzle depending on user input
 # information about the api and how to make requests can be found here: https://github.com/bertoort/sugoku
-def get_grid(input):
-    if input == 1:
+def get_grid(user_input):
+    if user_input == 1:
         response = requests.get("https://sugoku.herokuapp.com/board?difficulty=easy")
         grid = response.json()["board"]
         return grid
-    elif input == 2:
+    elif user_input == 2:
         response = requests.get("https://sugoku.herokuapp.com/board?difficulty=medium")
         grid = response.json()["board"]
         return grid
-    if input == 3:
+    if user_input == 3:
         response = requests.get("https://sugoku.herokuapp.com/board?difficulty=hard")
         grid = response.json()["board"]
         return grid
@@ -201,7 +201,6 @@ column_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hint_value = ["h"]
 row_input = ""
 column_input = 0
-# start = time.time()
 
 
 # the main game loop - called when program runs and if user wants to play again when a puzzle is solved
@@ -214,7 +213,6 @@ def main():
     game_board.print_board()  # initial print board to screen
     solved_board = Board(copy.deepcopy(game_board.grid))  # create a copy of board and solves it
     solved_board.solve(solved_board.grid)
-    solved_board.print_board()
     start = time.time()
 
     unsolved = True
@@ -292,7 +290,7 @@ def main():
 
             finally:
                 game_board.print_board()  # print updated game board
-                if solved_board.check_solved(solved_board.grid):  # check if any empty cells left
+                if game_board.check_solved(game_board.grid):  # check if any empty cells left
                     unsolved = False
                     print()
                     print("Congratulations")
@@ -332,7 +330,6 @@ main()  # initial call to run the game
 
 # To do
 # user input will not conflict with a hint input if 2 numbers in same row/column
+# finished solution could be wrong - check against solved solution
 # fix hints left
 # when out of hints offer to print solution
-# add timer to display how long it took to solve the board
-
