@@ -17,7 +17,8 @@ class Board:
                      "  E    . Each 3x3 box can contain one instance of each number",
                      "  F    . Each row can contain one instance of each number",
                      "  G    . Each column can contain one instance of each number",
-                     "  H", f"  I"]
+                     "  H    . If you are stuck, ask for a hint",
+                     "  I    . After a hint, check your previous inputs are correct"]
         self.row_index = 0  # keep track of how many rows printed during print section function in board class
 
     def remove_zeros(self, grid):  # takes grid and replaces zero's with empty spaces
@@ -87,7 +88,6 @@ class Board:
             if self.grid[row_index_value][column_index_value] == " " \
                     or self.copy_grid[row_index_value][column_index_value] == " ":
                 self.grid[row_index_value][column_index_value] = colored(value, "yellow")
-                self.hints.pop()
             else:
                 print("Square occupied")
         # this value will come from solved board
@@ -333,6 +333,5 @@ def main():
 main()  # initial call to run the game
 
 # To do
-# user input will not conflict with a hint input if 2 numbers in same row/column
 # finished solution could be wrong - check against solved solution
 # deploy on heroku and check it is running ok
