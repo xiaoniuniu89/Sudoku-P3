@@ -11,6 +11,14 @@ class Board:
         self.copy_grid = copy.deepcopy(self.grid)  # copy is needed for crosschecking user input with original grid
         self.border = colored(("+---" * 9) + "+", "blue")  # printed blue border for every 3x3 row top
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")  # 3x3 row bottom
+        # printed to the right of the board
+        self.side = ["  A            How to play Sudoku", "  B", "  C    . Every cell may contain a single number",
+                     "  D    . Only numbers 1-9 can be used",
+                     "  E    . Each 3x3 box can contain one instance of each number",
+                     "  F    . Each row can contain one instance of each number",
+                     "  G    . Each column can contain one instance of each number",
+                     "  H", f"  I"]
+        self.row_index = 0  # keep track of how many rows printed during print section function in board class
 
     def remove_zeros(self, grid):  # takes grid and replaces zero's with empty spaces
         for i in grid:
@@ -19,7 +27,7 @@ class Board:
                     i[x] = " "
 
     def print_section(self, i):  # prints 3 3x3 sections - (3 rows of board)
-        global row_index
+
         blue_post = colored("|", "blue")
         post = "|"
         print(blue_post + f" {(i[0])} "  # builds from left to right '|' and next number from the rows array
@@ -31,14 +39,14 @@ class Board:
               + blue_post + f" {(i[6])} "
               + post + f" {(i[7])} "
               + post + f" {(i[8])} "
-              + blue_post + row[row_index]
+              + blue_post + self.side[self.row_index]
               )
-        row_index += 1
+        self.row_index += 1
 
     # printing the board in done by printing 3 rows at a time. This was the easiest way to get row
     # and column numbers and to have each 3x3 box to have ia nice border top and bottom
     def print_board(self):
-        global row_index
+
         print("  1   2   3   4   5   6   7   8   9")  # column numbers reference
         print(self.border)  # border top of first 3x3 row
         for i in self.grid[0:3]:  # prints the first 3 arrays of the grid onto the board
@@ -50,7 +58,7 @@ class Board:
         for i in self.grid[6:9]:
             self.print_section(i)
         print(self.border)
-        row_index = 0
+        self.row_index = 0
 
     # To be able to input a number to a cell, the cell in the original grid must be empty
     # or the cell in the copy grid must be empty
@@ -79,6 +87,7 @@ class Board:
             if self.grid[row_index_value][column_index_value] == " " \
                     or self.copy_grid[row_index_value][column_index_value] == " ":
                 self.grid[row_index_value][column_index_value] = colored(value, "yellow")
+                self.hints.pop()
             else:
                 print("Square occupied")
         # this value will come from solved board
@@ -189,13 +198,7 @@ def get_grid(user_input):
 
 
 # global variables used throughout the program
-hints = [5]
-# printed to the right of the board
-row = ["  A     How to play Sudoku", "  B", "  C    . Every cell may contain a single number",
-       "  D    . Only numbers 1-9 can be used", "  E    . Each 3x3 box can contain 1-9 once",
-       "  F    . Each row can contain 1-9 once", "  G    . Each column can contain 1-9 once",
-       "  H", f"  I            ~ Hints left: {hints}"]
-row_index = 0  # keep track of how many rows printed during print section function in board class
+
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 column_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 hint_value = ["h"]
@@ -259,10 +262,11 @@ def main():
                 if input_value.isalpha():  # if user enters "h"
                     if input_value.lower() in hint_value:  # which only contains the letter "h"
                         invalid_input = False
-
                         # the value for the hint comes from the solved board
                         game_board.generate_hint(row_input, column_input,
                                                  solved_board.generate_hint(row_input, column_input))
+
+
 
                 elif str(input_value).isalnum():  # written this way to check against pressing enter key
                     if input_value in column_values:
@@ -331,5 +335,4 @@ main()  # initial call to run the game
 # To do
 # user input will not conflict with a hint input if 2 numbers in same row/column
 # finished solution could be wrong - check against solved solution
-# fix hints left
-# when out of hints offer to print solution
+# deploy on heroku and check it is running ok
