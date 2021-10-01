@@ -12,13 +12,14 @@ class Board:
         self.border = colored(("+---" * 9) + "+", "blue")  # printed blue border for every 3x3 row top
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")  # 3x3 row bottom
         # printed to the right of the board
-        self.side = ["  A        How to play Sudoku", "  B", "  C . Every cell may contain a single number",
-                     "  D . Only numbers 1-9 can be used",
-                     "  E . Each 3x3 box can not contain duplicates",
-                     "  F . Each row can not contain duplicates",
-                     "  G . Each column can not contain duplicates",
-                     "  H . If you are stuck, ask for a hint",
-                     "  I . Recheck your previous inputs"]
+        self.side = ["  A        How to play Sudoku", "  B . Each cell contains a single number",
+                     "  C . Only numbers 1-9 can be used",
+                     "  D . Each 3x3 box can't have duplicates",
+                     "  E . Each row can't have duplicates",
+                     "  F . Each column can't have duplicates",
+                     "  G . If you are stuck, ask for a hint",
+                     "  H . After you get a hint, dont forget",
+                     "  I . to recheck your previous inputs"]
         self.row_index = 0  # keep track of how many rows printed during print section function in board class
 
     def remove_zeros(self, grid):  # takes grid and replaces zero's with empty spaces
