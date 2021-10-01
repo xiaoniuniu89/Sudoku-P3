@@ -107,8 +107,6 @@ class Board:
         if self.grid == solved_grid:
             pass
 
-
-
     # goes through the board cell by cell to find the next empty cell
     def next_empty_cell(self, grid):
         for row in range(9):
@@ -171,12 +169,12 @@ def start_game():
     print("Easy: 1 ~ Medium: 2 ~ Hard: 3")
     print()
     # While loop for input validation - user must input 1, 2 or 3
-    user_choice = input("please enter 1, 2 or 3: ")
+    user_choice = input("please enter 1, 2 or 3: \n ")
     expected_input = ["1", "2", "3"]
     while user_choice not in expected_input:
         print("Sorry, to continue, you must enter 1 for easy, 2 for medium or 3 for hard: ")
         print()
-        user_choice = input("please enter 1, 2 or 3: ")
+        user_choice = input("please enter 1, 2 or 3: \n")
 
     user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
     game_board = Board(get_grid(user_choice))  # creates instance of Board class
@@ -234,7 +232,7 @@ def main():
                           "number(1-9) - eg a5 or c7"
             try:
                 # strips whitespace and - and /
-                row_input, column_input = list(input("Enter a row and column to input to: ").strip().replace
+                row_input, column_input = list(input("Enter a row and column to input to: \n").strip().replace
                                                (" ", "").replace(",", "").replace("-", ""))
 
             except:
@@ -258,7 +256,8 @@ def main():
             invalid_msg = "Sorry, to continue, you must only enter a digit between 1 - 9 or h for hint"
             try:
                 input_value = input(
-                    "Enter the number you wish to input to the board (0-9), or input 'h' for a hint: ").replace(" ", "")
+                    "Enter the number you wish to input to the board (0-9),"
+                    " or input 'h' for a hint: \n").replace(" ", "")
 
             except:
                 print(invalid_msg)
@@ -320,7 +319,7 @@ def main():
                     # check input - does user want to play again ?
                     invalid_choice = True
                     while invalid_choice:
-                        play_again = input("would you like to play again? y/n: ").replace(" ", "")
+                        play_again = input("would you like to play again? y/n: \n").replace(" ", "")
                         msg = "sorry, please input 'y' for yes, or 'n' for no"
                         try:
                             if play_again.lower() == "n":
@@ -345,6 +344,3 @@ def main():
 
 
 main()  # initial call to run the game
-
-# To do
-# deploy on heroku and check it is running ok
