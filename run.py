@@ -7,7 +7,7 @@ import copy
 # Board class that will store the sudoku board and its methods
 class Board:
     def __init__(self, grid):
-        self.grid = grid  # array of 9 arrays containing the unsolved sudoku board numbers
+        self.grid = grid  # list of 9 lists containing the unsolved sudoku board numbers
         self.copy_grid = copy.deepcopy(self.grid)  # copy is needed for crosschecking user input with original grid
         self.border = colored(("+---" * 9) + "+", "blue")  # printed blue border for every 3x3 row top
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")  # 3x3 row bottom
@@ -97,10 +97,10 @@ class Board:
             return value
 
     # checks if a cell is empty or not - if no empty cells board is full
-    def check_solved(self, grid):
+    def check_solved(self):
         for row in range(9):
             for column in range(9):
-                if grid[row][column] == " ":
+                if self.grid[row][column] == " ":
                     return False
         return True
 
@@ -164,7 +164,7 @@ class Board:
 def start_game():
     start = time.time()
     print()
-    print(" ############################################################################")
+    print("#############################################################################")
     print()
     print("Welcome to the Sudoku app!")
     print()
@@ -305,7 +305,7 @@ def main():
             finally:
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
-                if game_board.check_solved(solved_board.grid):  # check if any empty cells left
+                if game_board.check_solved():  # check if any empty cells left
                     unsolved = False
                     # message is displayed if the solution is correct
                     if solved_board.check_correct(solved_board.grid):
