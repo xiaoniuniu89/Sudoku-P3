@@ -45,8 +45,7 @@ class Board:
               )
         self.row_index += 1
 
-    # printing the board in done by printing 3 rows at a time. This was the easiest way to get row
-    # and column numbers and to have each 3x3 box to have ia nice border top and bottom
+    # printing the board is done by printing top border and then 3 rows at a time.
     def print_board(self):
 
         print("  1   2   3   4   5   6   7   8   9")  # column numbers reference
