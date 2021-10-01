@@ -12,13 +12,13 @@ class Board:
         self.border = colored(("+---" * 9) + "+", "blue")  # printed blue border for every 3x3 row top
         self.section_bottom = colored(("+" + ("-" * 11)) * 3 + "+", "blue")  # 3x3 row bottom
         # printed to the right of the board
-        self.side = ["  A            How to play Sudoku", "  B", "  C    . Every cell may contain a single number",
-                     "  D    . Only numbers 1-9 can be used",
-                     "  E    . Each 3x3 box can contain one instance of each number",
-                     "  F    . Each row can contain one instance of each number",
-                     "  G    . Each column can contain one instance of each number",
-                     "  H    . If you are stuck, ask for a hint",
-                     "  I    . After a hint, check your previous inputs are correct"]
+        self.side = ["  A        How to play Sudoku", "  B", "  C . Every cell may contain a single number",
+                     "  D . Only numbers 1-9 can be used",
+                     "  E . Each 3x3 box can not contain duplicates",
+                     "  F . Each row can not contain duplicates",
+                     "  G . Each column can not contain duplicates",
+                     "  H . If you are stuck, ask for a hint",
+                     "  I . Recheck your previous inputs"]
         self.row_index = 0  # keep track of how many rows printed during print section function in board class
 
     def remove_zeros(self, grid):  # takes grid and replaces zero's with empty spaces
@@ -160,7 +160,7 @@ class Board:
 def start_game():
     start = time.time()
     print()
-    print("############################################################################")
+    print(" ############################################################################")
     print()
     print("Welcome to the Sudoku app!")
     print()
@@ -169,12 +169,12 @@ def start_game():
     print("Easy: 1 ~ Medium: 2 ~ Hard: 3")
     print()
     # While loop for input validation - user must input 1, 2 or 3
-    user_choice = input("please enter 1, 2 or 3: \n ")
+    user_choice = input("please enter 1, 2 or 3:\n")
     expected_input = ["1", "2", "3"]
     while user_choice not in expected_input:
         print("Sorry, to continue, you must enter 1 for easy, 2 for medium or 3 for hard: ")
         print()
-        user_choice = input("please enter 1, 2 or 3: \n")
+        user_choice = input("please enter 1, 2 or 3:\n")
 
     user_choice = int(user_choice)  # turn into an integer to be used by get_grid function
     game_board = Board(get_grid(user_choice))  # creates instance of Board class
@@ -228,11 +228,11 @@ def main():
         # input must be a letter (a - i) followed by a number (1-9)
         invalid_input = True
         while invalid_input:
-            invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a column " \
+            invalid_msg = "Sorry, to input to the board, you must enter a row letter(a-i) followed by a \ncolumn " \
                           "number(1-9) - eg a5 or c7"
             try:
                 # strips whitespace and - and /
-                row_input, column_input = list(input("Enter a row and column to input to: \n").strip().replace
+                row_input, column_input = list(input("Enter a row and column to input to:\n").strip().replace
                                                (" ", "").replace(",", "").replace("-", ""))
 
             except:
@@ -257,48 +257,50 @@ def main():
             try:
                 input_value = input(
                     "Enter the number you wish to input to the board (0-9),"
-                    " or input 'h' for a hint: \n").replace(" ", "")
+                    " or input 'h' for a hint:\n").replace(" ", "")
 
             except:
                 print(invalid_msg)
                 print()
 
             else:
-                if input_value.isalpha():  # if user enters "h"
-                    if input_value.lower() in hint_value:  # which only contains the letter "h"
+                if input_value.isalpha():  # checking if user enters "h"
+                    if input_value.lower() not in hint_value:  # which only contains the letter "h"
+                        print(invalid_msg)
+                        print()
+                    elif input_value.lower() in hint_value:  # which only contains the letter "h"
                         invalid_input = False
                         # the value for the hint comes from the solved board
                         game_board.generate_hint(row_input, column_input,
                                                  solved_board.generate_hint(row_input, column_input))
-
-
+                        print()
 
                 elif str(input_value).isalnum():  # written this way to check against pressing enter key
                     if input_value in column_values:
-                        invalid_input = False
                         row_index = row_values.index(row_input)
                         column_index = column_values.index(column_input)
-                        # call possible() function to check if the inputted number is
-                        # legal according to the rules of sudoku
-                        if game_board.possible(row_index, column_index, int(input_value)):
-                            game_board.input_user_value(row_input, column_input, input_value)
+                        if not game_board.possible(row_index, column_index, int(input_value)):
+                            print("Sorry, that number doesn't work in that cell, please try again!")
                             print()
                         else:
-                            print()
-                            print("Sorry, that number doesn't work in that cell, please try again!")
-
+                            invalid_input = False
+                            # call possible() function to check if the inputted number is
+                            # legal according to the rules of sudoku
+                            if game_board.possible(row_index, column_index, int(input_value)):
+                                game_board.input_user_value(row_input, column_input, input_value)
+                                print()
 
                     else:
                         print(invalid_msg)
                         print()
-
 
                 else:
                     print(invalid_msg)
                     print()
 
             finally:
-                game_board.print_board()  # print updated game board
+                if not invalid_input:
+                    game_board.print_board()  # print updated game board
                 if game_board.check_solved(game_board.grid):  # check if any empty cells left
                     unsolved = False
                     # message is displayed if the solution is correct
@@ -319,7 +321,7 @@ def main():
                     # check input - does user want to play again ?
                     invalid_choice = True
                     while invalid_choice:
-                        play_again = input("would you like to play again? y/n: \n").replace(" ", "")
+                        play_again = input("would you like to play again? y/n:\n").replace(" ", "")
                         msg = "sorry, please input 'y' for yes, or 'n' for no"
                         try:
                             if play_again.lower() == "n":
