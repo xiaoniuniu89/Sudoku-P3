@@ -103,6 +103,12 @@ class Board:
                     return False
         return True
 
+    def check_correct(self, solved_grid):
+        if self.grid == solved_grid:
+            pass
+
+
+
     # goes through the board cell by cell to find the next empty cell
     def next_empty_cell(self, grid):
         for row in range(9):
@@ -296,15 +302,23 @@ def main():
                 game_board.print_board()  # print updated game board
                 if game_board.check_solved(game_board.grid):  # check if any empty cells left
                     unsolved = False
-                    print()
-                    print("Congratulations")
-                    print()
-                    minutes = divmod((time.time() - start), 60)[0]
-                    seconds = round(divmod((time.time() - start), 60)[1])
-                    print(f"You completed the puzzle in {int(minutes)} minute(s) & {seconds} second(s)! ")
-                    print()
-                    invalid_choice = True
+                    # message is displayed if the solution is correct
+                    if game_board.check_correct(solved_board.grid):
+                        print()
+                        print("Congratulations")
+                        print()
+                        minutes = divmod((time.time() - start), 60)[0]
+                        seconds = round(divmod((time.time() - start), 60)[1])
+                        print(f"You completed the puzzle in {int(minutes)} minute(s) & {seconds} second(s)! ")
+                        print()
+                    else:
+                        print("Your solution is a little off")
+                        print()
+                        print("Here is the correct solution")
+                        print()
+                        solved_board.print_board()
                     # check input - does user want to play again ?
+                    invalid_choice = True
                     while invalid_choice:
                         play_again = input("would you like to play again? y/n: ").replace(" ", "")
                         msg = "sorry, please input 'y' for yes, or 'n' for no"
@@ -333,5 +347,4 @@ def main():
 main()  # initial call to run the game
 
 # To do
-# finished solution could be wrong - check against solved solution
 # deploy on heroku and check it is running ok
