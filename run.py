@@ -104,9 +104,12 @@ class Board:
                     return False
         return True
 
+    # check if the board is solved after each input 
     def check_correct(self, solved_grid):
         if self.grid == solved_grid:
-            pass
+            return True
+        else:
+            return False
 
     # goes through the board cell by cell to find the next empty cell
     def next_empty_cell(self, grid):
@@ -302,10 +305,10 @@ def main():
             finally:
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
-                if game_board.check_solved(game_board.grid):  # check if any empty cells left
+                if game_board.check_solved(solved_board.grid):  # check if any empty cells left
                     unsolved = False
                     # message is displayed if the solution is correct
-                    if game_board.check_correct(solved_board.grid):
+                    if solved_board.check_correct(solved_board.grid):
                         print()
                         print("Congratulations")
                         print()
@@ -314,6 +317,7 @@ def main():
                         print(f"You completed the puzzle in {int(minutes)} minute(s) & {seconds} second(s)! ")
                         print()
                     else:
+                        # if it is incorrect display this message
                         print("Your solution is a little off")
                         print()
                         print("Here is the correct solution")
