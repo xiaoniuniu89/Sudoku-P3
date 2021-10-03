@@ -357,7 +357,7 @@ def main():
                 if game_board.check_solved():  # check if any empty cells left
                     unsolved = False
                     # message is displayed if the solution is correct
-                    if solved_board.check_correct(solved_board.grid):
+                    if game_board.check_correct(solved_board.grid):
                         print()
                         print("Congratulations")
                         print()
