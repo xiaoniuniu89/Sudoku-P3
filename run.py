@@ -103,7 +103,7 @@ class Board:
                     return False
         return True
 
-    # check if the board is solved after each input 
+    # check if the board is solved after each input
     def check_correct(self, solved_grid):
         if self.grid == solved_grid:
             return True
@@ -161,7 +161,6 @@ class Board:
 # start game function called by main() function - will be called when program
 # is run and if user wants to play another game when finished.
 def start_game():
-    start = time.time()
     print()
     print("#############################################################################")
     print()
