@@ -1,31 +1,53 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Sudoku-P3 
 
-Welcome Daniel Callaghan,
+## Table of Contents 
+- <a href="#about">About Sudoku-P3</a>
+- <a href="#how_to">How to play</a>
+- <a href="#features">Features</a>
+  - <a href="#difficulty">Difficulty Settings</a>
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+<section id="about">
 
-## Reminders
+# About Sudoku-p3
+Sudoku-P3 is a Python terminal game. It is deployed on heroku and uses a mock terminal made by Code institute. 
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+Users can play the classic game of Sudoku popularised by Maki Kaji.
 
-## Creating the Heroku app
+Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle if their solution is wrong they can see the correct solution. 
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+[The deployed site is here!](https://sudoku-p3.herokuapp.com/)
 
-1. `heroku/python`
-2. `heroku/nodejs`
+<img src="assets/images/am-i-responsive.png">
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+</section>
+<section id="how_to">
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+# How to play 
 
-Connect your GitHub repository and deploy as normal.
+Sudoku-P3 is based on the classic pen and paper game Sudoku, popularised by Maki Kanji. You can learn more about Sudoku [here](https://en.wikipedia.org/wiki/Sudoku)
 
-## Constraints
+The rules for Sudoku are quite simple. 
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+- There is a 9 x 9 grid which must be filled with numbers
+- The game starts with some squares already filled in
+- only the numbers 1 - 9 can be used 
+- Every square must contain one number 
+- Each 3×3 box can only contain each number from 1 to 9 once
+- Each vertical column can only contain each number from 1 to 9 once
+- Each horizontal row can only contain each number from 1 to 9 once
 
------
-Happy coding!
+</section>
+
+<section id="features">
+
+# Features 
+
+## <p id="difficulty">Difficulty Settings</p>
+- 3 difficulty settings and random board layout 
+  - Users can select the level of difficulty, easy, medium or hard. 
+  - The program will make a request to an API called [suGOku](https://sugoku.herokuapp.com/) and return the numbers for the board in the form of a Python list. 
+  - More information about making requests to suGOku can be found [here](https://github.com/bertoort/sugoku)
+
+<img src="assets/images/select-difficulty.png">
+
+</section>
