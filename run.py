@@ -119,13 +119,6 @@ class Board:
                     return False
         return True
 
-    # check if the board is solved after each input
-    def check_correct(self, solved_grid):
-        if self.grid == solved_grid:
-            return True
-        else:
-            return False
-
     # goes through the board cell by cell to find the next empty cell
     def next_empty_cell(self, grid):
         for row in range(9):
@@ -354,31 +347,52 @@ def main():
             finally:
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
-                if game_board.check_solved():  # check if any empty cells left
+                if game_board.check_solved():  # check for empty cells
                     unsolved = False
-                    # message is displayed if the solution is correct
-                    if game_board.check_correct(solved_board.grid):
-                        print()
-                        print("Congratulations")
-                        print()
-                        minutes = divmod((time.time() - start), 60)[0]
-                        seconds = round(divmod((time.time() - start), 60)[1])
-                        print(f"You completed the puzzle in {int(minutes)}"
-                              f" minute(s) & {seconds} second(s)! ")
-                        print()
-                    else:
-                        # if it is incorrect display this message
-                        print("Your solution is a little off")
-                        print()
-                        print("Here is the correct solution")
-                        print()
-                        solved_board.print_board()
+                    print()
+                    print("Congratulations")
+                    print()
+                    # display how long it took user
+                    # to complete the board
+                    minutes = divmod((time.time() - start), 60)[0]
+                    seconds = round(divmod((time.time() - start), 60)[1])
+                    print(f"You completed the puzzle in {int(minutes)}"
+                          f" minute(s) & {seconds} second(s)! ")
+                    print()
+                    # check if user would like to see the solved_board solution
+                    invalid_choice = True
+                    while invalid_choice:
+                        display = input("would you like to see the solution?"
+                                        " y/n:\n").replace(" ", "")
+                        msg = "sorry, please input 'y' for yes, or 'n' for no"
+                        # input validation
+                        try:
+                            if display.lower() == "y":
+                                invalid_choice = False
+                                print()
+                                print("Here is the correct solution")
+                                print()
+                                solved_board.print_board()
+
+                            elif display.lower() == "n":
+                                invalid_choice = False
+                                print()
+
+                            else:
+                                print(msg)  # catch any invalid input
+                                print()
+
+                        except:  # in case of error
+                            print(msg)
+                            print()
+
                     # check input - does user want to play again ?
                     invalid_choice = True
                     while invalid_choice:
                         play_again = input("would you like to play again?"
                                            " y/n:\n").replace(" ", "")
                         msg = "sorry, please input 'y' for yes, or 'n' for no"
+                        # input validation
                         try:
                             if play_again.lower() == "n":  # user quits game
                                 invalid_choice = False
