@@ -190,7 +190,7 @@ def start_game():
     expected_input = ["1", "2", "3"]
     while user_choice not in expected_input:
         print()
-        print("Sorry, to continue, you must enter 1 for"
+        print("Sorry, to continue, you must enter 1 for "
               "easy, 2 for medium or 3 for hard: ")
         print()
         user_choice = input("please enter 1, 2 or 3:\n")
@@ -289,7 +289,7 @@ def main():
         while invalid_input:
             # error message to display in case of error or unwanted
             # input, eg pressing enter
-            invalid_msg = "Sorry, to continue, you must only enter a digit "
+            invalid_msg = "Sorry, to continue, you must only enter a digit " \
             "between 1 - 9 or h for hint"
             try:
                 input_value = input(
