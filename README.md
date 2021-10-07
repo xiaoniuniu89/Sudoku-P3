@@ -86,5 +86,17 @@ The rules for Sudoku are quite simple.
 
 <img src="assets/images/val_input.png">
 
+## <p id="timer">Timer</p>
+- When user has finished filling the board a message displaying how long it took to finish the puzzle is displayed. 
+
+
+<img src="assets/images/timer.png">
+
+## <p id="solution">Solution</p>
+- When user has finished filling the board they can choose to see the solution to the board. 
+
+
+<img src="assets/images/solution.png">
+
 
 </section>
