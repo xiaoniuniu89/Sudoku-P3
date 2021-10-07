@@ -33,7 +33,7 @@ Sudoku-P3 is a Python terminal game. It is deployed on heroku and uses a mock te
 
 Users can play the classic game of Sudoku popularised by Maki Kaji.
 
-Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle if their solution is wrong they can see the correct solution. 
+Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle users can see correct solution as well as see how long it took to fill the board. 
 
 [The deployed site is here!](https://sudoku-p3.herokuapp.com/)
 
@@ -118,17 +118,25 @@ The rules for Sudoku are quite simple.
 
 
 ## <p id="input_val">Input Validation</p>
+
 - Difficulty select
   - You can not select anything other than 1, 2 or 3
+
 <img src="assets/images/dif_input.png">
+
 - Row, Column input 
   - You can only input a letter (a-i) followed by a number(1-9)
+
 <img src="assets/images/r_c_input.png">
+
 - Number Input 
   - You can only input number (1-9) or h for a hint 
+
 <img src="assets/images/num_h_input.png">
+
 - See solution & play again input
   - You can only enter 'y' or 'n'
+
 <img src="assets/images/y_n_input.png">
 
 ## <p id="future">Future Features</p>
