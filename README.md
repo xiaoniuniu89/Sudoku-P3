@@ -5,6 +5,7 @@
 - <a href="#how_to">How to play</a>
 - <a href="#features">Features</a>
   - <a href="#difficulty">Difficulty Settings</a>
+  - <a href="#board">Board</a>
 
 <section id="about">
 
@@ -43,11 +44,18 @@ The rules for Sudoku are quite simple.
 # Features 
 
 ## <p id="difficulty">Difficulty Settings</p>
-- 3 difficulty settings and random board layout 
-  - Users can select the level of difficulty, easy, medium or hard. 
-  - The program will make a request to an API called [suGOku](https://sugoku.herokuapp.com/) and return the numbers for the board in the form of a Python list. 
-  - More information about making requests to suGOku can be found [here](https://github.com/bertoort/sugoku)
+- Users can select the level of difficulty, easy, medium or hard. 
+- The program will make a request to an API called [suGOku](https://sugoku.herokuapp.com/) and return the numbers for the board in the form of a Python list. 
+- More information about making requests to suGOku can be found [here](https://github.com/bertoort/sugoku).
 
 <img src="assets/images/select-difficulty.png">
+
+## <p id="board">Board</p>
+
+- Blue borders for each 3x3 grid to make the different lines and grids stand out for the user. 
+- Rows lettered A - I.
+- Columns numbered 1 - 9.
+
+<img src="assets/images/board.png">
 
 </section>
