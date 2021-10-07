@@ -14,6 +14,17 @@
   - <a href="#play_again">Play Again</a>
   - <a href="#input_val">Input Validation</a>
   - <a href="#future">Future Features</a>
+- <a href="#data_model">Data Model</a>
+- <a href="#logic">Logic flow</a>
+- <a href="#testing">Testing</a>
+  - <a href="#bugs">Bugs</a>
+    - <a href="#solved_bug">Solved</a>
+    - <a href="#remaining_bug">Remaining</a>
+  - <a href="#validator_test">Validator Testing</a>
+- <a href="#deployment">Deployment</a>
+- <a href="#credits">Credits</a>
+  - <a href="#tutorials">Tutorials</a>
+  - <a href="#aknowledgements">Aknowledgements</a>
 
 <section id="about">
 
