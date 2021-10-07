@@ -98,5 +98,12 @@ The rules for Sudoku are quite simple.
 
 <img src="assets/images/solution.png">
 
+## <p id="play_again">Play Again</p>
+- When user has finished filling the board they can choose play again or quit. 
+
+
+
+<img src="assets/images/play_again.png">
+
 
 </section>
