@@ -116,8 +116,13 @@ The rules for Sudoku are quite simple.
 - Number Input 
   - You can only input number (1-9) or h for a hint 
 <img src="assets/images/num_h_input.png">
-- See solution, play again 
+- See solution & play again input
   - You can only enter 'y' or 'n'
+<img src="assets/images/y_n_input.png">
 
+## <p id="future">Future Features</p>
+- implement app into a GUI like pygame
+- comparing time against previous attempts 
+- exporting a generated board into a pdf for printing 
 
 </section>
