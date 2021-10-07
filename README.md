@@ -106,4 +106,18 @@ The rules for Sudoku are quite simple.
 <img src="assets/images/play_again.png">
 
 
+## <p id="input_val">Input Validation</p>
+- Difficulty select
+  - You can not select anything other than 1, 2 or 3
+<img src="assets/images/dif_input.png">
+- Row, Column input 
+  - You can only input a letter (a-i) followed by a number(1-9)
+<img src="assets/images/r_c_input.png">
+- Number Input 
+  - You can only input number (1-9) or h for a hint 
+<img src="assets/images/num_h_input.png">
+- See solution, play again 
+  - You can only enter 'y' or 'n'
+
+
 </section>
