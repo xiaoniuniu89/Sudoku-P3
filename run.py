@@ -398,9 +398,6 @@ def main():
                                 invalid_choice = False
                                 print()
                                 print("see you next time, thanks for playing")
-                                print()
-                                print("program will close in 5 seconds.......")
-                                time.sleep(5)  # close program
 
                             elif play_again.lower() == "y":
                                 invalid_choice = False
