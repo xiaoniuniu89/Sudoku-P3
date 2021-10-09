@@ -346,3 +346,27 @@ More detailed instructions can be found [here](https://docs.github.com/en/github
 
 
 </section>
+
+<section id="credits">
+
+# Credits 
+
+I wanted to challenge myself to use python to impliment an algorithm as it was not something I understood very well. I am very happy with what I have learned from this project. I used a lot of outside resources to learn about backtracking and recursion. I also was lucky to have a few people to test the app for me for bugs. 
+
+## <p id="tutorials">Tutorials</p>
+- Computerphile 
+  - This tutorial was a really great and clear introduction to how recursion works. 
+    - https://www.youtube.com/watch?v=8lhxIOAfDss
+  - This tutorial was a great resource in learning how to impliment recursion and backtracking in a sudoku app. In particular I relied heavily on their explanation of the solve function. 
+    - https://www.youtube.com/watch?v=G_UYXzGuqvM
+- Kylie Ying 
+  - Kylie has many videos about beginner python programs. Her tutorial about recursion in sudoku helped me a lot in writting the helper functions for my solve function. 
+    - https://www.youtube.com/watch?v=tvP_FZ-D9Ng
+
+
+## <p id="aknowledgements">Aknowledgements</p>
+- My mentor Precious for his patience and helpful advice. 
+- My wife CC for playtesting and encouragement when things would not work.  
+
+
+</section>
