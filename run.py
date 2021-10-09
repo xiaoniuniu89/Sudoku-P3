@@ -229,6 +229,33 @@ def get_grid(user_input):
         return grid
 
 
+def finished():
+    # checks if user is finished inputing to the board
+    # called when board is full
+    invalid_choice = True
+    while invalid_choice:
+        fin = input("Board is full, are you finished?"
+                    " y/n:\n").replace(" ", "")
+        msg = "sorry, please input 'y' for yes, or 'n' for no"
+        # input validation
+        try:
+            if fin.lower() == "y":
+                invalid_choice = False
+                return True
+
+            elif fin.lower() == "n":
+                invalid_choice = False
+                print()
+
+            else:
+                print(msg)  # catch any invalid input
+                print()
+
+        except:  # in case of error
+            print(msg)
+            print()
+
+
 # global variables used throughout the program
 
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
@@ -290,7 +317,7 @@ def main():
             # error message to display in case of error or unwanted
             # input, eg pressing enter
             invalid_msg = "Sorry, to continue, you must only enter a digit " \
-            "between 1 - 9 or h for hint"
+                          "between 1 - 9 or h for hint"
             try:
                 input_value = input(
                     "Enter the number you wish to input to the board (0-9),"
@@ -348,68 +375,73 @@ def main():
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
                 if game_board.check_solved():  # check for empty cells
-                    unsolved = False
-                    print()
-                    print("Congratulations")
-                    print()
-                    # display how long it took user
-                    # to complete the board
-                    minutes = divmod((time.time() - start), 60)[0]
-                    seconds = round(divmod((time.time() - start), 60)[1])
-                    print(f"You completed the puzzle in {int(minutes)}"
-                          f" minute(s) & {seconds} second(s)! ")
-                    print()
-                    # check if user would like to see the solved_board solution
-                    invalid_choice = True
-                    while invalid_choice:
-                        display = input("would you like to see the solution?"
-                                        " y/n:\n").replace(" ", "")
-                        msg = "sorry, please input 'y' for yes, or 'n' for no"
-                        # input validation
-                        try:
-                            if display.lower() == "y":
-                                invalid_choice = False
-                                print()
-                                print("Here is the correct solution")
-                                print()
-                                solved_board.print_board()
+                    if finished():
+                        unsolved = False
+                        print()
+                        print("Congratulations")
+                        print()
+                        # display how long it took user
+                        # to complete the board
+                        minutes = divmod((time.time() - start), 60)[0]
+                        seconds = round(divmod((time.time() - start), 60)[1])
+                        print(f"You completed the puzzle in {int(minutes)}"
+                              f" minute(s) & {seconds} second(s)! ")
+                        print()
+                        # check if user would like to see the solution
+                        invalid_choice = True
+                        while invalid_choice:
+                            display = input("would you like to see the "
+                                            "solution?"
+                                            " y/n:\n").replace(" ", "")
+                            msg = "sorry, please input 'y' for yes, "
+                            "or 'n' for no"
+                            # input validation
+                            try:
+                                if display.lower() == "y":
+                                    invalid_choice = False
+                                    print()
+                                    print("Here is the correct solution")
+                                    print()
+                                    solved_board.print_board()
 
-                            elif display.lower() == "n":
-                                invalid_choice = False
-                                print()
+                                elif display.lower() == "n":
+                                    invalid_choice = False
+                                    print()
 
-                            else:
-                                print(msg)  # catch any invalid input
-                                print()
+                                else:
+                                    print(msg)  # catch any invalid input
+                                    print()
 
-                        except:  # in case of error
-                            print(msg)
-                            print()
-
-                    # check input - does user want to play again ?
-                    invalid_choice = True
-                    while invalid_choice:
-                        play_again = input("would you like to play again?"
-                                           " y/n:\n").replace(" ", "")
-                        msg = "sorry, please input 'y' for yes, or 'n' for no"
-                        # input validation
-                        try:
-                            if play_again.lower() == "n":  # user quits game
-                                invalid_choice = False
-                                print()
-                                print("see you next time, thanks for playing")
-
-                            elif play_again.lower() == "y":
-                                invalid_choice = False
-                                main()  # restart game
-
-                            else:
-                                print(msg)  # catch any invalid input
+                            except:  # in case of error
+                                print(msg)
                                 print()
 
-                        except:  # in case of error
-                            print(msg)
-                            print()
+                        # check input - does user want to play again ?
+                        invalid_choice = True
+                        while invalid_choice:
+                            play_again = input("would you like to play again?"
+                                               " y/n:\n").replace(" ", "")
+                            msg = "sorry, please input 'y' for yes, "
+                            "or 'n' for no"
+                            # input validation
+                            try:
+                                if play_again.lower() == "n":  # quits game
+                                    invalid_choice = False
+                                    print()
+                                    print("see you next time, thanks "
+                                          "for playing")
+
+                                elif play_again.lower() == "y":
+                                    invalid_choice = False
+                                    main()  # restart game
+
+                                else:
+                                    print(msg)  # catch any invalid input
+                                    print()
+
+                            except:  # in case of error
+                                print(msg)
+                                print()
 
 
 main()  # initial call to run the game
