@@ -15,6 +15,8 @@
   - <a href="#input_val">Input Validation</a>
   - <a href="#future">Future Features</a>
 - <a href="#data_model">Data Model</a>
+  - <a href="#attributes">Attributes</a>
+  - <a href="#methods">Methods</a>
 - <a href="#logic">Logic flow</a>
 - <a href="#testing">Testing</a>
   - <a href="#bugs">Bugs</a>
@@ -143,5 +145,104 @@ The rules for Sudoku are quite simple.
 - implement app into a GUI like pygame
 - comparing time against previous attempts 
 - exporting a generated board into a pdf for printing 
+
+</section>
+
+<section id="data_model">
+
+# Data Model
+
+The Sudoku board is made from a Board class. There is also an instance of a solved board made from the Board class for generating hints.
+
+The Board class needs to be passed a grid as a parameter. 
+
+## <p id="attributes">Attributes</p>
+
+The Board class has 6 attributes 
+
+### self.grid
+
+- The grid is a 2d list. There are 9 lists that each make a row of the sudoku board. When the difficulty of the game is selected the program makes a request to the Sugoku Api which returns the grid. 
+
+### self.copy_grid
+
+- The copy grid is used for crosschecking user input against the original grid. If a number is present in the copy grid, it means it is a number that can not be overwritten.
+
+### self.border 
+
+- The top and bottom border of the board printed in the terminal.
+
+### self.section_bottom
+
+- Every 3 rows there will be another blue border. This was the best way I could think to make the board visually stand out in the terminal. 
+
+### self.side 
+
+- This gives the row letters and how to play rules printed to the right of the board. 
+
+### self.row_index 
+
+- This keeps track of sections printed during one of the Board class methods.
+ 
+## <p id="methods">Methods</p>
+
+The Board class contains many methods including: 
+
+### remove_zeros
+
+- This goes through the grid and replaces any 0 with an empty string. This is nescessary to print blank spaces in the terminal. The 0's are a product of the grid supplied by the API. 
+
+### print_section 
+
+- This is called from another function. It essentially prints 3 rows by printing a number(i) and a post (|). 
+
+### print_board 
+
+- Starts by printing the column numbers and border followed by calling print_section method then self.section_bottom x 3  for each 3x3 section, then followed buy the last border at the bottom. 
+
+### input_user_value 
+
+- checks the cell user wishes to input to is empty and is a valid cell ie, does not conflict with another cell according to sudoku rules. If it is the number is printed in red to denote it as a number inputed by users own logic/guess. 
+
+### generate_hint 
+
+- It will cross reference the cell the user wishes to input to, cross reference with a copy of the solved grid to see what number is there, then it will input that number into the game board grid colored yellow to denote it as a number that comes from a hint. 
+
+### check_solved 
+
+- Goes through each cell and if it finds no empty cells it means the board has been solved. 
+
+### next_empty_cell 
+
+- Goes thought the grid row by row left to right and returns the next available empty cell. 
+
+### solve 
+
+- The solve function is the meat of the application in my opinion. It recursively checks each cell for possible numbers. When it finds a cell with no possible input it will backtrack to the last cell and try a different number and so on until the board is solved. I referenced three main tutorials to learn about recursion and backtracking. 
+
+  -  https://www.youtube.com/watch?v=8lhxIOAfDss
+
+      - A introduction to recursion from computerphile 
+  
+  - https://www.youtube.com/watch?v=G_UYXzGuqvM
+
+    - recursion in sudoku tutorial from computerphile 
+
+  - https://www.youtube.com/watch?v=tvP_FZ-D9Ng
+
+    - Another sudoku solver using recursion from Kylie Ying
+
+- there are 3 steps to the solve function 
+
+  - step 1 is to find the next empty cell by calling the next_empty_cell funciton. 
+
+  - step 2 is to try each number 1-9 in that cell by calling the possible method. 
+
+  - step 3 is to input the number and continue to the next cell. If board can not be solved this way then it will go back to previous cell and try a different number. 
+
+### possible 
+
+- Helper funciton that will first check each row, then column then each 3x3 grid to see if a value from 1-9 will work. 
+
 
 </section>
