@@ -320,7 +320,7 @@ def main():
                           "between 1 - 9 or h for hint"
             try:
                 input_value = input(
-                    "Enter the number you wish to input to the board (0-9),"
+                    "Enter the number you wish to input to the board (1-9),"
                     " or input 'h' for a hint:\n").replace(" ", "")
 
             except:
