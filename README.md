@@ -306,3 +306,43 @@ I passed the code through [PEP8 online validator](http://pep8online.com/) and it
 <img src="assets/images/validator.png">
 
 </section>
+
+<section id="deployment">
+
+The site is deployed on [heroku](https://www.heroku.com/)
+
+The steps I took to deploy on heroku are as follows:
+
+- Fork or clone this repository 
+- go to www.heroku.com and login or create an account 
+- On the dashboard in the top right click on "new app"
+- Click settings 
+- under config vars add key: PORT and Value 8000
+- under buildpacks add python and node.js in that order 
+- Go to deploy 
+- link Heroku app to your github and search for the repository 
+- Click on deploy to build the app 
+
+How to fork the repository
+- Go to [github.com](https://www.github.com) and login.
+- Click sudoku_p3 repository, the repository is located [here](https://github.com/xiaoniuniu89/Sudoku-P3)
+- in the top right of the page click the "fork" button
+- you will now have a copy of the repository in your github account.
+
+How to clone the repository
+- Go to [github.com](https://www.github.com)
+- Log in to account
+- Click repositories
+- Click sudoku_p3 repository, the repository is located [here](https://github.com/xiaoniuniu89/Sudoku-P3)
+- Click the green code button that says Clone or download 
+- to copy from HTTPS copy URL link "HTTPS". 
+- open terminal
+- go to directory where you want to save the files
+- type git clone and paste the link
+- press enter and the clone will be created
+
+
+More detailed instructions can be found [here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository#cloning-a-repository-to-github-desktop)
+
+
+</section>
