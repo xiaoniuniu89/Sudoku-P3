@@ -20,8 +20,6 @@
 - <a href="#logic">Logic flow</a>
 - <a href="#testing">Testing</a>
   - <a href="#bugs">Bugs</a>
-    - <a href="#solved_bug">Solved</a>
-    - <a href="#remaining_bug">Remaining</a>
   - <a href="#validator_test">Validator Testing</a>
 - <a href="#deployment">Deployment</a>
 - <a href="#credits">Credits</a>
@@ -264,5 +262,36 @@ At the end of the game the user can choose to play again or not.
 The following flow diagram illustrates the logic of the game and all of the user choices, input validation and loops. 
 
 <img src="assets/images/flowchart.png">
+
+</section>
+
+<section id="testing">
+
+# Testing 
+
+I have manually tested the application by: 
+- passing through a pep8 linter to confirm there are no problems 
+- a lot of input validation testing such as:
+  - blank inputs(enter)
+  - input strings where expecting numbers 
+  - inputing special characters 
+  - inputing numbers that conflict according to sudoku rules 
+  - inputting letters other than a-i and numbers greater than 1-9 
+- Testing if it works on my local terminal and the heroku mock terminal made by code institute. 
+
+## <p id="bugs">Bugs</p>
+
+- Solved Bugs 
+  - Originally, the solved board was printed in yellow. Unfortunately, the termcolor library caused a lot of errors when used with the solve function. It would always solve the board with lots of conflicting numbers. I fixed this bug by leaving the solved grid white and changing one number by itself to yellow, when called from the generate_hint function.
+  - Again, I had an issue when trying to use termcolor to print a board with a mix of the final user board and any numbers that got wrong in a different color. The solution would never solve correctly and be full of conflicting numbers. To solve this, I just gave the user the option to see the solution at the end printed as a seperate board. It is not the optimal user experience solution, but it is an acceptable trade off to make the program work correctly. 
+
+- Unsolved Bugs 
+  - Very rarely, the Sugoku API can be slow to respond and a user can wait about 5-10 seconds for the API to return a grid. 
+
+## <p id="validator_test">Validator Testing</p>
+
+I passed the code through [PEP8 online validator](http://pep8online.com/) and it returned no errors or issues
+
+<img src="assets/images/validator.png">
 
 </section>
