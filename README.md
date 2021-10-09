@@ -25,7 +25,7 @@
 - <a href="#deployment">Deployment</a>
 - <a href="#credits">Credits</a>
   - <a href="#tutorials">Tutorials</a>
-  - <a href="#aknowledgements">Aknowledgements</a>
+  - <a href="#acknowledgements">Acknowledgements</a>
 
 <section id="about">
 
@@ -40,7 +40,7 @@ The code makes use of four modules.
 
 Users can play the classic game of Sudoku popularised by Maki Kaji.
 
-Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle users can see correct solution as well as see how long it took to fill the board. 
+Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle users can see the correct solution as well as see how long it took to fill the board. 
 
 [The deployed site is here!](https://sudoku-p3.herokuapp.com/)
 
@@ -101,7 +101,7 @@ The rules for Sudoku are quite simple.
 <img src="assets/images/rules.png">
 
 ## <p id="val_check">Validity Checker</p>
-- If, by the rules of sudoku, a number conflicts with yellow or white number, it can not be inputed. 
+- If, by the rules of sudoku, a number conflicts with a yellow or white number, it can not be inputed. 
 - If a number wants to be placed in a cell containing a white or yellow number, it can not be placed. 
 - Red numbers can be updated.
 
@@ -121,7 +121,7 @@ The rules for Sudoku are quite simple.
 <img src="assets/images/solution.png">
 
 ## <p id="play_again">Play Again</p>
-- When user has finished filling the board they can choose play again or quit. 
+- When the user has finished filling the board they can choose to play again or quit. 
 
 
 
@@ -199,7 +199,7 @@ The Board class contains many methods including:
 
 ### remove_zeros
 
-- This goes through the grid and replaces any 0 with an empty string. This is nescessary to print blank spaces in the terminal. The 0's are a product of the grid supplied by the API. 
+- This goes through the grid and replaces any 0 with an empty string. This is necessary to print blank spaces in the terminal. The 0's are a product of the grid supplied by the API. 
 
 ### print_section 
 
@@ -207,11 +207,11 @@ The Board class contains many methods including:
 
 ### print_board 
 
-- Starts by printing the column numbers and border followed by calling print_section method then self.section_bottom x 3  for each 3x3 section, then followed buy the last border at the bottom. 
+- Starts by printing the column numbers and border followed by calling print_section method then self.section_bottom x 3  for each 3x3 section, then followed by the last border at the bottom. 
 
 ### input_user_value 
 
-- checks the cell user wishes to input to is empty and is a valid cell ie, does not conflict with another cell according to sudoku rules. If it is the number is printed in red to denote it as a number inputed by users own logic/guess. 
+- checks the cell the user wishes to input to is empty and is a valid cell i.e,, does not conflict with another cell according to sudoku rules. If it is, the number is printed in red to denote it as a number inputted by users own logic/guess. 
 
 ### generate_hint 
 
@@ -243,15 +243,15 @@ The Board class contains many methods including:
 
 - there are 3 steps to the solve function 
 
-  - step 1 is to find the next empty cell by calling the next_empty_cell funciton. 
+  - step 1 is to find the next empty cell by calling the next_empty_cell function. 
 
   - step 2 is to try each number 1-9 in that cell by calling the possible method. 
 
-  - step 3 is to input the number and continue to the next cell. If board can not be solved this way then it will go back to previous cell and try a different number. 
+  - step 3 is to input the number and continue to the next cell. If the board can not be solved this way, then it will go back to the previous cell and try a different number. 
 
 ### possible 
 
-- Helper funciton that will first check each row, then column then each 3x3 grid to see if a value from 1-9 will work. 
+- Helper function that will first check each row, then column then each 3x3 grid to see if a value from 1-9 will work. 
 
 
 </section>
@@ -260,7 +260,7 @@ The Board class contains many methods including:
 
 # Logic Flow 
 
-When the program begins, the main game loop begins. The user must select a difficulty. Based on the difficulty, two instances of the Board class is generated, 1 unsolved and 1 solved. Then the game timer starts. 
+When the program begins, the main game loop begins. The user must select a difficulty. Based on the difficulty, two instances of the Board class are generated, 1 unsolved and 1 solved. Then the game timer starts. 
 
 The user must enter a valid cell and then select a number between 1-9 or "h" for a hint. 
 
@@ -285,8 +285,8 @@ I have manually tested the application by:
 - a lot of input validation testing such as:
   - blank inputs(enter)
   - input strings where expecting numbers 
-  - inputing special characters 
-  - inputing numbers that conflict according to sudoku rules 
+  - inputting special characters 
+  - inputting numbers that conflict according to sudoku rules 
   - inputting letters other than a-i and numbers greater than 1-9 
 - Testing if it works on my local terminal and the heroku mock terminal made by code institute. 
 
@@ -351,7 +351,7 @@ More detailed instructions can be found [here](https://docs.github.com/en/github
 
 # Credits 
 
-I wanted to challenge myself to use python to impliment an algorithm as it was not something I understood very well. I am very happy with what I have learned from this project. I used a lot of outside resources to learn about backtracking and recursion. I also was lucky to have a few people to test the app for me for bugs. 
+I wanted to challenge myself to use python to implement an algorithm as it was not something I understood very well. I am very happy with what I have learned from this project. I used a lot of outside resources to learn about backtracking and recursion. I also was lucky to have a few people to test the app for me for bugs. 
 
 ## <p id="tutorials">Tutorials</p>
 - Computerphile 
@@ -364,7 +364,7 @@ I wanted to challenge myself to use python to impliment an algorithm as it was n
     - https://www.youtube.com/watch?v=tvP_FZ-D9Ng
 
 
-## <p id="aknowledgements">Aknowledgements</p>
+## <p id="acknowledgements">Acknowledgements</p>
 - My mentor Precious for his patience and helpful advice. 
 - My wife CC for playtesting and encouragement when things would not work.  
 
