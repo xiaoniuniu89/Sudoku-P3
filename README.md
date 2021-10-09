@@ -3,6 +3,7 @@
 ## Table of Contents 
 - <a href="#about">About Sudoku-P3</a>
 - <a href="#how_to">How to play</a>
+- <a href="#ux">UX Design</a>
 - <a href="#features">Features</a>
   - <a href="#difficulty">Difficulty Settings</a>
   - <a href="#board">Board</a>
@@ -31,6 +32,12 @@
 # About Sudoku-p3
 Sudoku-P3 is a Python terminal game. It is deployed on heroku and uses a mock terminal made by Code institute. 
 
+The code makes use of four modules. 
+  - time - to measure how long it takes the user to complete the puzzle.
+  - termcolor - a module to output text in the terminal in ANSII color format. More information about termcolor can be found [here](https://pypi.org/project/termcolor/)
+  - requests - to reach out to an API called sugoku and get back a 2d list of sudoku numbers to be used in the board. More information about sugoku can be found [here](https://github.com/bertoort/sugoku)
+  - copy - to make copies of the grid variable that stores the 2d list of numbers that make up the generated sudoku game board. 
+
 Users can play the classic game of Sudoku popularised by Maki Kaji.
 
 Users can select an easy, medium or hard Sudoku puzzle to solve, get hints if they are stuck on a square, and after finishing the puzzle users can see correct solution as well as see how long it took to fill the board. 
@@ -55,6 +62,10 @@ The rules for Sudoku are quite simple.
 - Each 3×3 box can only contain each number from 1 to 9 once
 - Each vertical column can only contain each number from 1 to 9 once
 - Each horizontal row can only contain each number from 1 to 9 once
+
+</section>
+
+<section id="ux">
 
 </section>
 
