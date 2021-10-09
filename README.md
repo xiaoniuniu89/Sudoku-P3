@@ -246,3 +246,23 @@ The Board class contains many methods including:
 
 
 </section>
+
+<section id="logic">
+
+# Logic Flow 
+
+When the program begins, the main game loop begins. The user must select a difficulty. Based on the difficulty, two instances of the Board class is generated, 1 unsolved and 1 solved. Then the game timer starts. 
+
+The user must enter a valid cell and then select a number between 1-9 or "h" for a hint. 
+
+Every time the user inputs to the board the program checks if the board is solved or not and prints a new updated board with the input in red for user input or yellow for a hint. 
+
+Along the way each input is validated before moving onto the next step. 
+
+At the end of the game the user can choose to play again or not. 
+
+The following flow diagram illustrates the logic of the game and all of the user choices, input validation and loops. 
+
+<img src="assets/images/flowchart.png">
+
+</section>
