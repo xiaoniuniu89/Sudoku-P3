@@ -19,6 +19,7 @@
   - <a href="#attributes">Attributes</a>
   - <a href="#methods">Methods</a>
 - <a href="#logic">Logic flow</a>
+- <a href="#techno">Technologies Used</a>
 - <a href="#testing">Testing</a>
   - <a href="#bugs">Bugs</a>
   - <a href="#validator_test">Validator Testing</a>
@@ -31,12 +32,6 @@
 
 # About Sudoku-p3
 Sudoku-P3 is a Python terminal game. It is deployed on heroku and uses a mock terminal made by Code institute. 
-
-The code makes use of four modules. 
-  - time - to measure how long it takes the user to complete the puzzle.
-  - termcolor - a module to output text in the terminal in ANSII color format. More information about termcolor can be found [here](https://pypi.org/project/termcolor/)
-  - requests - to reach out to an API called sugoku and get back a 2d list of sudoku numbers to be used in the board. More information about sugoku can be found [here](https://github.com/bertoort/sugoku)
-  - copy - to make copies of the grid variable that stores the 2d list of numbers that make up the generated sudoku game board. 
 
 Users can play the classic game of Sudoku popularised by Maki Kaji.
 
@@ -275,6 +270,46 @@ The following flow diagram illustrates the logic of the game and all of the user
 <img src="assets/images/flowchart.png">
 
 </section>
+
+<section id="techno">
+
+# Technologies Used
+
+[Python](https://www.python.org)
+- Programming language
+- Python Modules used:
+  - time - to measure how long it takes the user to complete the puzzle.
+  - termcolor - a module to output text in the terminal in ANSII color format. More information about termcolor can be found [here](https://pypi.org/project/termcolor/)
+  - requests - to reach out to an API called sugoku and get back a 2d list of sudoku numbers to be used in the board. More information about sugoku can be found [here](https://github.com/bertoort/sugoku)
+  - copy - to make copies of the grid variable that stores the 2d list of numbers that make up the generated sudoku game board. 
+
+[Gitpod](https://www.gitpod.io) 
+- IDE (Intigrated Development Environment)
+
+[Pycharm](https://www.jetbrains.com/pycharm/) 
+- IDE (Intigrated Development Environment)
+
+[Github](https://www.github.com)
+- remote repository hosting platform
+
+[Heroku](https://www.heroku.com/home)
+- hosting platform for the app
+
+[I love images](https://www.iloveimg.com/crop-image)
+- To resize and crop photos
+
+[Lucidchart](https://www.lucidchart.com)
+- To make logic flowchart
+
+[Am I responsive](http://ami.responsivedesign.is/?url=http://ami.responsivedesign.is/)
+- To make README profile pic of responsiveness on different devices 
+
+
+
+
+
+</section>
+
 
 <section id="testing">
 
