@@ -293,7 +293,8 @@ def main():
             try:
                 # strips whitespace and "-" and "/"
                 row_input, column_input = list(input(
-                    "Enter a row and column to input to:\n").strip().replace
+                    "Enter a row (a-i) followed by a column (1-9) "
+                    "to input to:\n").strip().replace
                     (" ", "").replace(",", "").replace("-", ""))
 
             except:
