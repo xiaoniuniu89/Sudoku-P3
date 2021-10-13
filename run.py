@@ -291,7 +291,7 @@ def main():
                 "a row letter(a-i) followed by a \ncolumn " \
                           "number(1-9) - eg a5 or c7"
             try:
-                # strips whitespace and - and /
+                # strips whitespace and "-" and "/"
                 row_input, column_input = list(input(
                     "Enter a row and column to input to:\n").strip().replace
                     (" ", "").replace(",", "").replace("-", ""))
@@ -337,14 +337,16 @@ def main():
                     elif input_value.lower() in hint_value:
                         invalid_input = False
                         # the value for the hint comes from the solved board
-                        game_board.generate_hint(row_input, column_input,
+                        game_board.generate_hint(row_input.lower(),
+                                                 column_input,
                                                  solved_board.generate_hint
-                                                 (row_input, column_input))
+                                                 (row_input.lower(),
+                                                 column_input))
                         print()
 
                 elif str(input_value).isalnum():  # check pressing enter key
                     if input_value in column_values:  # check num is valid
-                        row_index = row_values.index(row_input)
+                        row_index = row_values.index(row_input.lower())
                         column_index = column_values.index(column_input)
                         if not game_board.possible(row_index, column_index,
                                                    int(input_value)):
