@@ -1,5 +1,4 @@
 import time
-import os
 import copy
 from termcolor import colored
 import requests
@@ -277,7 +276,6 @@ column_input = 0
 # while loop ends when puzzle is solved
 def main():
     game_board = (start_game())  # welcome message and generate grid
-    os.system("clear")  # clear screen
     print()
     game_board.print_board()  # initial print board to screen
     solved_board = Board(copy.deepcopy(game_board.grid))  # create copy & solve
@@ -326,6 +324,7 @@ def main():
                             invalid_input = False  # input is valid
                             print()
                     else:
+                        print()
                         print(invalid_msg)  # any other exceptions
                         print()
 
@@ -393,7 +392,6 @@ def main():
 
             finally:
                 if not invalid_input:
-                    os.system("clear")  # clear screen
                     game_board.print_board()  # print updated game board
                 if game_board.check_solved():  # check for empty cells
                     if finished():  # if user is finished inputting to board
