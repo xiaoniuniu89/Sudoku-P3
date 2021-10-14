@@ -104,6 +104,7 @@ class Board:
             if self.grid[row_index][column_index] == " " \
                     or self.copy_grid[row_index][column_index] == " ":
                 self.grid[row_index][column_index] = colored(value, "yellow")
+                self.copy_grid[row_index][column_index] = value
             else:
                 print("Square occupied")
         # this value will come from solved board
@@ -285,32 +286,44 @@ def main():
         # checking input - stores input as a row and column input to
         # be turned into a row, column index later
         # input must be a letter (a - i) followed by a number (1-9)
-        invalid_input = True
-        while invalid_input:
-            invalid_msg = "Sorry, to input to the board, you must enter " \
-                "a row letter(a-i) followed by a \ncolumn " \
-                          "number(1-9) - eg a5 or c7"
-            try:
-                # strips whitespace and "-" and "/"
-                row_input, column_input = list(input(
-                    "Enter a row (a-i) followed by a column (1-9) "
-                    "to input to:\n").strip().replace
-                    (" ", "").replace(",", "").replace("-", ""))
+        # first check if square is occupied by
+        # yellow(hint) or white(original) number
+        square_occupied = True
+        while square_occupied:
+            invalid_input = True
+            while invalid_input:
+                invalid_msg = "Sorry, to input to the board, you must enter " \
+                    "a row letter(a-i) followed by a \ncolumn " \
+                    "number(1-9) - eg a5 or c7"
+                try:
+                    # strips whitespace and "-" and "/"
+                    row_input, column_input = list(input(
+                        "Enter a row (a-i) followed by a column (1-9) "
+                        "to input to:\n").strip().replace
+                        (" ", "").replace(",", "").replace("-", ""))
 
-            except:
-                # in case of any other invalid input will display error message
-                # and remind user what to type and how to type it
-                print(invalid_msg)
-                print()
-
-            else:
-                if (row_input.lower() in row_values and
-                        column_input in column_values):
-                    invalid_input = False  # input is valid
+                except:
+                    # in case of any other invalid input will display error
+                    # message and remind user what to type and how to type it
+                    print(invalid_msg)
                     print()
+
                 else:
-                    print(invalid_msg)  # any other exceptions
-                    print()
+                    if (row_input.lower() in row_values and
+                            column_input in column_values):
+                        row_index = row_values.index(row_input.lower())
+                        column_index = column_values.index(column_input)
+                        if (game_board.copy_grid[row_index]
+                           [column_index] != " "):
+                            game_board.print_board()
+                            print("Square occupied")
+                        else:
+                            square_occupied = False
+                            invalid_input = False  # input is valid
+                            print()
+                    else:
+                        print(invalid_msg)  # any other exceptions
+                        print()
 
         invalid_input = True
         # checking input of (1-9)
@@ -396,8 +409,8 @@ def main():
                             display = input("would you like to see the "
                                             "solution?"
                                             " y/n:\n").replace(" ", "")
-                            msg = "sorry, please input 'y' for yes, "
-                            "or 'n' for no"
+                            msg = "sorry, please input 'y' for yes, " \
+                                "or 'n' for no"
                             # input validation
                             try:
                                 if display.lower() == "y":
@@ -424,8 +437,8 @@ def main():
                         while invalid_choice:
                             play_again = input("would you like to play again?"
                                                " y/n:\n").replace(" ", "")
-                            msg = "sorry, please input 'y' for yes, "
-                            "or 'n' for no"
+                            msg = "sorry, please input 'y' for yes, " \
+                                "or 'n' for no"
                             # input validation
                             try:
                                 if play_again.lower() == "n":  # quits game
