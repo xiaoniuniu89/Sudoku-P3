@@ -1,7 +1,8 @@
 import time
+import os
+import copy
 from termcolor import colored
 import requests
-import copy
 
 
 # Board class that will store the sudoku board and its methods
@@ -276,6 +277,8 @@ column_input = 0
 # while loop ends when puzzle is solved
 def main():
     game_board = (start_game())  # welcome message and generate grid
+    os.system("clear")  # clear screen
+    print()
     game_board.print_board()  # initial print board to screen
     solved_board = Board(copy.deepcopy(game_board.grid))  # create copy & solve
     solved_board.solve(solved_board.grid)
@@ -315,8 +318,9 @@ def main():
                         column_index = column_values.index(column_input)
                         if (game_board.copy_grid[row_index]
                            [column_index] != " "):
-                            game_board.print_board()
+                            print()
                             print("Square occupied")
+                            print()
                         else:
                             square_occupied = False
                             invalid_input = False  # input is valid
@@ -389,9 +393,10 @@ def main():
 
             finally:
                 if not invalid_input:
+                    os.system("clear")  # clear screen
                     game_board.print_board()  # print updated game board
                 if game_board.check_solved():  # check for empty cells
-                    if finished():
+                    if finished():  # if user is finished inputting to board
                         unsolved = False
                         print()
                         print("Congratulations")
