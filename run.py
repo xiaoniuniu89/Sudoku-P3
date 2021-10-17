@@ -78,9 +78,7 @@ class Board:
 
     # To be able to input a number to a cell, the cell in
     # the original grid must be empty or the cell
-    # in the copy grid must be empty. If the cell in the
-    # copy grid is empty, it means the space contains a number
-    # the user inputted and therefore it can be updated
+    # in the copy grid must be empty. 
     def input_user_value(self, row, column, value):
         global row_values
         global column_values
@@ -121,6 +119,8 @@ class Board:
         return True
 
     # goes through the board cell by cell to find the next empty cell
+    # I learnt about this helper function from the following tutorial
+    # https://www.youtube.com/watch?v=tvP_FZ-D9Ng
     def next_empty_cell(self, grid):
         for row in range(9):
             for column in range(9):
@@ -132,7 +132,6 @@ class Board:
     # regarding recursion and backtracking:
     # 1) https://www.youtube.com/watch?v=8lhxIOAfDss
     # 2) https://www.youtube.com/watch?v=G_UYXzGuqvM
-    # 3) https://www.youtube.com/watch?v=tvP_FZ-D9Ng
 
     def solve(self, grid):  # recursively solve the sudoku board
         # step 1 is to find the next available empty cell
@@ -257,7 +256,7 @@ def finished():
             print()
 
 
-# global variables used throughout the program
+# global variables
 
 row_values = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
 column_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -284,8 +283,7 @@ def main():
 
     unsolved = True
     while unsolved:
-        # checking input - stores input as a row and column input to
-        # be turned into a row, column index later
+        # checking input 
         # input must be a letter (a - i) followed by a number (1-9)
         # first check if square is occupied by
         # yellow(hint) or white(original) number
@@ -310,10 +308,13 @@ def main():
                     print()
 
                 else:
+                    # if pass input validation
                     if (row_input.lower() in row_values and
                             column_input in column_values):
                         row_index = row_values.index(row_input.lower())
                         column_index = column_values.index(column_input)
+                        # if original grid is not empty
+                        # there is already a number there
                         if (game_board.copy_grid[row_index]
                            [column_index] != " "):
                             print()
