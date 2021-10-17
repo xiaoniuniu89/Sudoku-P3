@@ -62,6 +62,30 @@ The rules for Sudoku are quite simple.
 
 <section id="ux">
 
+# UX Design
+
+## User Stories
+- As a user I want a digital version of sudoku to avoid paper waste.
+- As a user I want varying levels of difficulty to suit the mood I am in or to train myself to get better at sudoku. 
+- As a user I want the option to get hints to the correct solution whenever I need it. 
+- As a user I want to know if my solution is correct or not.
+- As a user I want to be able to pencil in numbers that can be edited later.
+- As a user, I want to know how long it takes me to complete a puzzle.
+
+All user needs are met by the program. 
+
+  - It is fully digital. 
+
+  - It has 3 levels of difficulty to choose from. 
+
+  - The user can get hints to any cell on the board. 
+
+  - The user can choose to see the solution at the end of the game. 
+
+  - The user inputs in red can be re-inputted.
+
+  - A timer displays how long it took to complete the game at the end of the game. 
+
 </section>
 
 <section id="features">
