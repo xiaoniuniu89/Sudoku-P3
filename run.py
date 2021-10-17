@@ -1,5 +1,6 @@
 import time
 import copy
+from sys import exit
 # Termcolor module - https://pypi.org/project/termcolor/
 from termcolor import colored
 import requests
@@ -230,7 +231,7 @@ def get_grid(user_input):
             grid = response.json()["board"]
             return grid
 
-    # in case of API error, timeouts
+    # in case of API error
     except requests.exceptions.RequestException as e:
         print("Sorry, something went wrong, try again later!")
         raise SystemExit(e)
@@ -457,6 +458,7 @@ def main():
                                     print()
                                     print("see you next time, thanks "
                                           "for playing")
+                                    exit()
 
                                 elif play_again.lower() == "y":
                                     invalid_choice = False
