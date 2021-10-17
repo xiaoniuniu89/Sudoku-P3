@@ -316,7 +316,7 @@ The following flow diagram illustrates the logic of the game and all of the user
 # Testing 
 
 I have manually tested the application by: 
-- passing through a pep8 linter to confirm there are no problems 
+- passing through [pep8 linter](http://pep8online.com/) to confirm there are no problems 
 - a lot of input validation testing such as:
   - blank inputs(enter)
   - input strings where expecting numbers 
