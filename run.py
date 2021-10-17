@@ -1,6 +1,5 @@
 import time
 import copy
-from sys import exit
 # Termcolor module - https://pypi.org/project/termcolor/
 from termcolor import colored
 import requests
@@ -402,7 +401,7 @@ def main():
             finally:
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
-                if game_board.check_solved():  # check for empty cells
+                if solved_board.check_solved():  # check for empty cells
                     if finished():  # if user is finished inputting to board
                         unsolved = False
                         print()
@@ -458,7 +457,6 @@ def main():
                                     print()
                                     print("see you next time, thanks "
                                           "for playing")
-                                    exit()
 
                                 elif play_again.lower() == "y":
                                     invalid_choice = False
