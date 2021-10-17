@@ -1,5 +1,6 @@
 import time
 import copy
+# Termcolor module - https://pypi.org/project/termcolor/
 from termcolor import colored
 import requests
 
@@ -78,7 +79,7 @@ class Board:
 
     # To be able to input a number to a cell, the cell in
     # the original grid must be empty or the cell
-    # in the copy grid must be empty. 
+    # in the copy grid must be empty.
     def input_user_value(self, row, column, value):
         global row_values
         global column_values
@@ -212,21 +213,27 @@ def start_game():
 # information about the api and how to make requests
 # can be found here: https://github.com/bertoort/sugoku
 def get_grid(user_input):
-    if user_input == 1:
-        response = requests.get("https://sugoku.herokuapp.com/"
-                                "board?difficulty=easy")
-        grid = response.json()["board"]
-        return grid
-    elif user_input == 2:
-        response = requests.get("https://sugoku.herokuapp.com/"
-                                "board?difficulty=medium")
-        grid = response.json()["board"]
-        return grid
-    if user_input == 3:
-        response = requests.get("https://sugoku.herokuapp.com/"
-                                "board?difficulty=hard")
-        grid = response.json()["board"]
-        return grid
+    try:
+        if user_input == 1:
+            response = requests.get("https://sugoku.herokuapp.com/"
+                                    "board?difficulty=easy")
+            grid = response.json()["board"]
+            return grid
+        elif user_input == 2:
+            response = requests.get("https://sugoku.herokuapp.com/"
+                                    "board?difficulty=medium")
+            grid = response.json()["board"]
+            return grid
+        elif user_input == 3:
+            response = requests.get("https://sugoku.herokuapp.com/"
+                                    "board?difficulty=hard")
+            grid = response.json()["board"]
+            return grid
+
+    # in case of API error, timeouts
+    except requests.exceptions.RequestException as e:
+        print("Sorry, something went wrong, try again later!")
+        raise SystemExit(e)
 
 
 def finished():
@@ -283,7 +290,7 @@ def main():
 
     unsolved = True
     while unsolved:
-        # checking input 
+        # checking input
         # input must be a letter (a - i) followed by a number (1-9)
         # first check if square is occupied by
         # yellow(hint) or white(original) number
