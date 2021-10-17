@@ -401,7 +401,7 @@ def main():
             finally:
                 if not invalid_input:
                     game_board.print_board()  # print updated game board
-                if solved_board.check_solved():  # check for empty cells
+                if game_board.check_solved():  # check for empty cells
                     if finished():  # if user is finished inputting to board
                         unsolved = False
                         print()
