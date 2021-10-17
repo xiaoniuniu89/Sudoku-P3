@@ -414,6 +414,35 @@ def main():
                         print(f"You completed the puzzle in {int(minutes)}"
                               f" minute(s) & {seconds} second(s)! ")
                         print()
+                        # check if user would like to see the solution
+                        invalid_choice = True
+                        while invalid_choice:
+                            display = input("would you like to see the "
+                                            "solution?"
+                                            " y/n:\n").replace(" ", "")
+                            msg = "sorry, please input 'y' for yes, " \
+                                "or 'n' for no"
+                            # input validation
+                            try:
+                                if display.lower() == "y":
+                                    invalid_choice = False
+                                    print()
+                                    print("Here is a correct solution")
+                                    print()
+                                    solved_board.print_board()
+
+                                elif display.lower() == "n":
+                                    invalid_choice = False
+                                    print()
+
+                                else:
+                                    print(msg)  # catch any invalid input
+                                    print()
+
+                            except:  # in case of error
+                                print(msg)
+                                print()
+
                         # check input - does user want to play again ?
                         invalid_choice = True
                         while invalid_choice:
