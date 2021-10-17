@@ -72,6 +72,7 @@ The rules for Sudoku are quite simple.
 - As a user I want a digital version of sudoku to avoid paper waste.
 - As a user I want varying levels of difficulty to suit the mood I am in or to train myself to get better at sudoku. 
 - As a user I want the option to get hints to the correct solution whenever I need it. 
+- As a user I want to know if my solution is correct or not.
 - As a user I want to be able to pencil in numbers that can be edited later.
 - As a user, I want to know how long it takes me to complete a puzzle.
 
@@ -82,6 +83,8 @@ All user needs are met by the program.
   - It has 3 levels of difficulty to choose from. 
 
   - The user can get hints to any cell on the board. 
+
+  - The user can choose to see the solution at the end of the game. 
 
   - The user inputs in red can be re-inputted.
 
@@ -388,13 +391,17 @@ As a user I want the option to get hints to the correct solution whenever I need
 
 - The user can input a hint to the board by entering "h" after selecting a cell to input to. 
 
+As a user I want to know if my solution is correct or not.
+
+- Users have the option to see the correct solution when they have completed their own board. 
+
 As a user I want to be able to pencil in numbers that can be edited later.
 
 - User inputs are entered in red. Any red number can be revisited and changed by the user. 
 
 As a user, I want to know how long it takes me to complete a puzzle.
 
-- When the user fills their board, the program will display a timer of how long it took them to finish the game. 
+- When the user fills their board, the program will display a timer of how long it took them to finish the game.
 
 </section>
 
