@@ -332,7 +332,8 @@ I have manually tested the application by:
   - Again, I had an issue when trying to use termcolor to print a board with a mix of the final user board and any numbers that got wrong in a different color. The solution would never solve correctly and be full of conflicting numbers. To solve this, I just gave the user the option to see the solution at the end printed as a seperate board. It is not the optimal user experience solution, but it is an acceptable trade off to make the program work correctly. 
 
 - Unsolved Bugs 
-  - Very rarely, the Sugoku API can be slow to respond and a user can wait about 5-10 seconds for the API to return a grid. 
+  - Very rarely, the Sugoku API can be slow to respond and a user can wait about 5-10 seconds for the API to return a grid.
+  - When selecting the hard difficulty(3) when the main function is called, it sometimes takes a few seconds after the board is generated for the program to go to the main game loop and begin asking for user input.
 
 ## <p id="validator_test">Validator Testing</p>
 
