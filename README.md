@@ -4,6 +4,9 @@
 - <a href="#about">About Sudoku-P3</a>
 - <a href="#how_to">How to play</a>
 - <a href="#ux">UX Design</a>
+  - <a href="#user_stories">User Stories</a>
+  - <a href="#typography">Typography</a>
+  - <a href="#color">Color</a>
 - <a href="#features">Features</a>
   - <a href="#difficulty">Difficulty Settings</a>
   - <a href="#board">Board</a>
@@ -23,6 +26,7 @@
 - <a href="#testing">Testing</a>
   - <a href="#bugs">Bugs</a>
   - <a href="#validator_test">Validator Testing</a>
+  - <a href="#test_user_stories">Testing User Stories</a>
 - <a href="#deployment">Deployment</a>
 - <a href="#credits">Credits</a>
   - <a href="#tutorials">Tutorials</a>
@@ -64,7 +68,7 @@ The rules for Sudoku are quite simple.
 
 # UX Design
 
-## User Stories
+## <p id="user_stories"> User Stories</p>
 - As a user I want a digital version of sudoku to avoid paper waste.
 - As a user I want varying levels of difficulty to suit the mood I am in or to train myself to get better at sudoku. 
 - As a user I want the option to get hints to the correct solution whenever I need it. 
@@ -86,11 +90,11 @@ All user needs are met by the program.
 
   - A timer displays how long it took to complete the game at the end of the game. 
 
-  ## Typography 
+  ## <p id="typography">Typography</p> 
 
   - [Arial](https://docs.microsoft.com/en-us/typography/font-list/arial) is used for the "RUN PROGRAM" button. 
   
-  ## Color 
+  ## <p id="color">Color</p> 
 
   The use of the [termcolor](https://pypi.org/project/termcolor/) module, lets the terminal output use color. Blue for the board boarders, yellow for hint inputs and red for user inputs. 
 
@@ -373,9 +377,37 @@ I passed the code through [PEP8 online validator](http://pep8online.com/) and it
 
 <img src="assets/images/validator.png">
 
+## <p id="test_user_stories">Testing User Stories</p>
+
+As a user I want a digital version of sudoku to avoid paper waste.
+
+- The entire game is a digital implimentation of sudoku and no paper is needed to enjoy the game.
+
+As a user I want varying levels of difficulty to suit the mood I am in or to train myself to get better at sudoku. 
+
+- There are 3 levels of difficulty to choose from easy, medium and hard. So the user will always have an appropriate game for mood/challenge requirements.
+
+As a user I want the option to get hints to the correct solution whenever I need it. 
+
+- The user can input a hint to the board by entering "h" after selecting a cell to input to. 
+
+As a user I want to know if my solution is correct or not.
+
+- Users have the option to see the correct solution when they have completed their own board. 
+
+As a user I want to be able to pencil in numbers that can be edited later.
+
+- User inputs are entered in red. Any red number can be revisited and changed by the user. 
+
+As a user, I want to know how long it takes me to complete a puzzle.
+
+- When the user fills their board, the program will display a timer of how long it took them to finish the game. 
+
 </section>
 
 <section id="deployment">
+
+# Deployment
 
 The site is deployed on [heroku](https://www.heroku.com/)
 
