@@ -96,7 +96,7 @@ All user needs are met by the program.
   
   ## <p id="color">Color</p> 
 
-  The use of the [termcolor](https://pypi.org/project/termcolor/) module, lets the terminal output use color. Blue for the board boarders, yellow for hint inputs and red for user inputs. 
+  The use of the [termcolor](https://pypi.org/project/termcolor/) module, lets the terminal output use color. Blue for the board borders, yellow for hint inputs and red for user inputs. 
 
 </section>
 
@@ -184,7 +184,6 @@ All user needs are met by the program.
 ## <p id="future">Future Features</p>
 - implement app into a GUI like pygame
 - comparing time against previous attempts 
-- exporting a generated board into a pdf for printing 
 
 </section>
 
@@ -202,7 +201,7 @@ The Board class has 6 attributes
 
 ### self.grid
 
-- The grid is a 2d list. There are 9 lists that each make a row of the sudoku board. When the difficulty of the game is selected the program makes a request to the Sugoku Api which returns the grid. 
+- The grid is a 2d list. There are 9 lists that each make a row of the sudoku board. When the difficulty of the game is selected the program makes a request to the [Sugoku](https://sugoku.herokuapp.com/) Api which returns the grid. 
 
 ### self.copy_grid
 
@@ -255,6 +254,7 @@ The Board class contains many methods including:
 ### next_empty_cell 
 
 - Goes thought the grid row by row left to right and returns the next available empty cell. 
+  - https://www.youtube.com/watch?v=tvP_FZ-D9Ng Tutorial referenced below for solving the board but was also used in this method 
 
 ### solve 
 
@@ -283,6 +283,9 @@ The Board class contains many methods including:
 ### possible 
 
 - Helper function that will first check each row, then column then each 3x3 grid to see if a value from 1-9 will work. 
+  - https://www.youtube.com/watch?v=G_UYXzGuqvM
+
+    - recursion in sudoku tutorial from computerphile 
 
 
 </section>
@@ -352,7 +355,7 @@ The following flow diagram illustrates the logic of the game and all of the user
 # Testing 
 
 I have manually tested the application by: 
-- passing through [pep8 linter](http://pep8online.com/) to confirm there are no problems 
+- passing through [pep8online linter](http://pep8online.com/) to confirm there are no problems 
 - a lot of input validation testing such as:
   - blank inputs(enter)
   - input strings where expecting numbers 
