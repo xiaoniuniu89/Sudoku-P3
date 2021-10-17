@@ -86,6 +86,14 @@ All user needs are met by the program.
 
   - A timer displays how long it took to complete the game at the end of the game. 
 
+  ## Typography 
+
+  - [Arial](https://docs.microsoft.com/en-us/typography/font-list/arial) is used for the "RUN PROGRAM" button. 
+  
+  ## Color 
+
+  The use of the [termcolor](https://pypi.org/project/termcolor/) module, lets the terminal output use color. Blue for the board boarders, yellow for hint inputs and red for user inputs. 
+
 </section>
 
 <section id="features">
