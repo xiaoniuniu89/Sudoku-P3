@@ -215,17 +215,17 @@ def start_game():
 def get_grid(user_input):
     try:
         if user_input == 1:
-            response = requests.get("https://sugoku.herokuapp.com/"
+            response = requests.get("https://sugoku.onrender.com/"
                                     "board?difficulty=easy")
             grid = response.json()["board"]
             return grid
         elif user_input == 2:
-            response = requests.get("https://sugoku.herokuapp.com/"
+            response = requests.get("https://sugoku.onrender.com/"
                                     "board?difficulty=medium")
             grid = response.json()["board"]
             return grid
         elif user_input == 3:
-            response = requests.get("https://sugoku.herokuapp.com/"
+            response = requests.get("https://sugoku.onrender.com/"
                                     "board?difficulty=hard")
             grid = response.json()["board"]
             return grid
